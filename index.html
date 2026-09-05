@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <title>Caracalla — Yihan Wu | Graphs, Time Series & Statistics</title>
+  <meta name="description" content="Yihan Wu (Caracalla), MA in Statistics student at Columbia University. Research interests in graph learning, hierarchical time series, and spatiotemporal modeling.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Caracalla — Yihan Wu">
+  <meta property="og:description" content="Structure, signals, and everything between. Graph learning × Time series × Statistics.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23203e30'/%3E%3Cpath d='M44 17A20 20 0 1 0 44 47M42 24A12 12 0 1 0 42 40' fill='none' stroke='%23e6edcf' stroke-width='2.5'/%3E%3Ccircle cx='47' cy='32' r='3' fill='%23cfeb94'/%3E%3C/svg%3E">
+  <style>
+/* CARACALLA — an independent academic homepage. No external assets required. */
+:root{--paper:#f6f5ef;--surface:#eeeee5;--card:#fcfcf8;--ink:#1e302a;--muted:#637069;--line:#d7dcd0;--green:#38654e;--green-dark:#203e30;--wash:#e6ecdc;--accent:#cfeb94;--accent-ink:#254529;--white:#f8faef;--nav:rgba(246,245,239,.93);--serif:Georgia,'Times New Roman','Noto Serif CJK SC',serif;--sans:Inter,'Helvetica Neue',Arial,'Microsoft YaHei','Noto Sans CJK SC',sans-serif;--mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace}
+[data-theme=dark]{--paper:#17251f;--surface:#1f3027;--card:#1a2a22;--ink:#e8edde;--muted:#a6b5a6;--line:#36473a;--green:#b5d59d;--green-dark:#d9e7c9;--wash:#293f2d;--accent:#cee998;--accent-ink:#203624;--white:#f8faef;--nav:rgba(23,37,31,.94)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}::selection{background:var(--accent);color:#22392b}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{color:inherit;cursor:pointer}button:disabled{cursor:default}button,a{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--green);outline-offset:6px}button{border:0;background:none}svg{display:block}img{max-width:100%}.wrap{width:min(1280px,calc(100% - 112px));margin:0 auto}.mono{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1.6px;text-transform:uppercase}.muted{color:var(--muted)}.skip{position:fixed;top:-80px;left:20px;background:var(--ink);color:var(--paper);padding:10px 20px;z-index:100}.skip:focus{top:15px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.icon{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.5}.arrow{font-size:20px;line-height:1;display:inline-block;transition:transform .2s}a:hover .arrow{transform:translate(2px,-2px)}
+/* Navigation */
+.site-header{position:sticky;top:0;z-index:30;background:var(--nav);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.header-inner{height:86px;display:flex;align-items:center;justify-content:space-between;gap:25px}.brand{display:flex;align-items:center;gap:12px}.brand-symbol{width:33px;height:33px;color:var(--ink);flex:none}.brand-word{font-size:23px;font-family:var(--serif);letter-spacing:-.9px;font-weight:400}.brand-dot{color:var(--green)}.nav-links{display:flex;align-items:center;gap:30px;margin-left:auto;margin-right:43px;font-size:12px}.nav-links a{padding:9px 0;position:relative;color:var(--muted)}.nav-links a:after{content:'';position:absolute;height:1px;bottom:3px;left:0;right:100%;background:var(--ink);transition:right .2s}.nav-links a:hover,.nav-links a.active{color:var(--ink)}.nav-links a:hover:after,.nav-links a.active:after{right:0}.nav-tools{display:flex;gap:16px;align-items:center}.language{font-size:11px;letter-spacing:.8px;padding:7px 0;white-space:nowrap}.language b{font-weight:500}.language span[aria-hidden]{opacity:.25;margin:0 8px}.tool-rule{height:18px;width:1px;background:var(--line)}.theme-toggle{width:25px;height:30px;display:grid;place-items:center;padding:0}.mobile-toggle{display:none;width:30px;height:30px;padding:4px}.moon-icon{display:block}.sun-icon{display:none}[data-theme=dark] .moon-icon{display:none}[data-theme=dark] .sun-icon{display:block}
+/* Hero */
+.hero{padding-top:41px}.hero-topline{display:flex;justify-content:space-between;align-items:center;color:var(--muted);gap:20px}.status{display:flex;align-items:center;gap:9px;font-size:10px;letter-spacing:1.5px}.status-dot{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 0 4px var(--wash);flex:none}.local-time{font-family:var(--mono);font-size:10px;letter-spacing:1px;white-space:nowrap}.hero-grid{display:grid;grid-template-columns:1fr 1.04fr;gap:45px;align-items:center;min-height:634px;padding:39px 0 32px}.hero-copy{padding:8px 0 20px}.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:1.7px;text-transform:uppercase;color:var(--green);margin:0 0 24px}.hero h1{font-family:var(--serif);font-size:clamp(84px,8.4vw,120px);line-height:.94;letter-spacing:-7px;font-weight:400;margin:0 0 27px}.hero h1 em{font-weight:400;color:var(--green)}.name-second{display:flex;align-items:baseline;gap:27px;margin-top:8px}.chinese-name{font-family:var(--sans);font-size:18px;font-weight:400;letter-spacing:6px;line-height:1.5;white-space:nowrap}.alias{display:block;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:19px}.hero-line{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1.28;letter-spacing:-.5px;margin:0 0 16px}.hero-description{max-width:432px;font-size:13px;color:var(--muted);line-height:1.95;margin:0 0 27px}.hero-description strong{font-weight:500;color:var(--ink)}.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:27px}.button{display:inline-flex;gap:25px;align-items:center;justify-content:center;font-size:11px;font-weight:500;letter-spacing:.2px;min-height:44px;padding:12px 20px;transition:background .2s,transform .2s}.button-primary{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}.button-primary:hover{background:var(--green-dark);color:var(--paper);transform:translateY(-2px)}.text-link{display:inline-flex;align-items:center;gap:12px;font-size:11px;font-weight:500;padding:9px 0;border-bottom:1px solid var(--line)}.text-link:hover{border-color:var(--ink)}
+/* Interactive scientific figure */
+.hero-figure{position:relative;align-self:stretch;display:flex;flex-direction:column;justify-content:center;margin:0;min-width:0}.figure-panel{position:relative;background:radial-gradient(ellipse at 54% 45%,var(--wash) 0%,transparent 66%);height:499px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.figure-head{display:flex;justify-content:space-between;align-items:center;position:absolute;top:16px;left:0;right:0;z-index:2;gap:12px}.figure-title{color:var(--muted);font-size:9px;letter-spacing:1.4px}.figure-tabs{display:flex;gap:3px;border:1px solid var(--line);padding:3px;background:var(--paper)}.figure-tabs button{font-family:var(--mono);font-size:9px;letter-spacing:.3px;min-width:51px;min-height:25px;padding:3px 8px;transition:background .2s}.figure-tabs button[aria-pressed=true]{background:var(--ink);color:var(--paper)}.graph-canvas{display:block;width:100%;height:100%;cursor:crosshair}.formula{position:absolute;left:7px;top:83px;font-family:var(--serif);font-style:italic;font-size:16px;color:var(--muted);pointer-events:none}.axis-note{position:absolute;left:7px;bottom:97px;color:var(--muted);font-size:9px;pointer-events:none}.axis-note:before{content:'+';font-size:19px;display:block;margin-bottom:6px;color:var(--green)}.graph-readout{position:absolute;bottom:16px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:15px;pointer-events:none}.graph-readout>div{display:flex;align-items:center;gap:12px}.node-marker{height:7px;width:7px;display:inline-block;background:var(--green);border-radius:50%}.graph-readout span{font-size:9px;letter-spacing:1px}.graph-readout .signal-key{color:var(--muted);letter-spacing:0}.pause-button{display:flex;gap:6px;align-items:center;pointer-events:auto;min-width:65px;min-height:29px;padding:2px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--line);background:var(--paper)}.figure-caption{padding-top:14px;display:flex;justify-content:space-between;gap:14px;color:var(--muted);font-size:9px}.figure-caption strong{font-weight:400;color:var(--ink)}.figure-caption .mono{font-size:9px}.figure-hint{font-size:9px;line-height:1.7;max-width:185px;text-align:right}.hero-bottom{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 85px;padding:24px 0 26px;gap:38px}.summary-item{display:grid;grid-template-columns:22px 1fr;gap:14px}.summary-item+.summary-item{border-left:1px solid var(--line);padding-left:32px}.summary-index{font-family:var(--mono);font-size:9px;color:var(--muted);padding-top:2px}.summary-title{font-family:var(--mono);font-size:9px;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}.summary-text{font-size:12px;line-height:1.55}.summary-sub{font-size:10px;color:var(--muted);margin-top:3px}
+/* Editorial sections */
+.section{scroll-margin-top:110px;padding-bottom:85px}.section-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:25px;margin-bottom:35px}.section-label{display:flex;gap:16px;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding-top:9px}.section-number{color:var(--green);font-size:10px}.section-heading h2{font-family:var(--serif);font-size:44px;line-height:1.1;letter-spacing:-1.5px;font-weight:400;margin:0}.section-heading h2 em{color:var(--green);font-weight:400}.section-heading .heading-right{width:68.5%;display:flex;justify-content:space-between;align-items:end;gap:22px}.tiny-tag{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--muted);white-space:nowrap;padding-bottom:7px}
+/* Featured paper */
+.paper{display:grid;grid-template-columns:40% 60%;border:1px solid var(--line);background:var(--card)}.paper-art{background:var(--green-dark);color:#e9efdd;min-height:456px;position:relative;overflow:hidden;padding:26px 26px 19px;display:flex;flex-direction:column;justify-content:space-between}[data-theme=dark] .paper-art{background:#294934}.paper-art-top{display:flex;justify-content:space-between;align-items:center;gap:15px;font-family:var(--mono);font-size:9px;letter-spacing:1px}.paper-art-tag{border:1px solid #769176;padding:3px 7px;color:#ddecce;font-size:9px}.tree-viz{width:100%;height:auto;margin:auto 0}.tree-line{stroke:#8ba984;stroke-width:1.1;fill:none}.tree-line-active{stroke:#d0e99e;stroke-width:1.5;fill:none}.tree-dot{fill:#385944;stroke:#b1c6a0;stroke-width:1}.tree-dot-active{fill:#d2e99f;stroke:#e5f4c9;stroke-width:1.3}.tree-area{fill:#bada85;fill-opacity:.08;stroke:#bed792;stroke-opacity:.38;stroke-dasharray:3 4}.tree-wave{stroke:#c8e0aa;stroke-width:1.1;fill:none}.paper-art-footer{display:flex;justify-content:space-between;gap:20px;color:#c3d1b7;font-size:9px;font-family:var(--mono);line-height:1.7}.paper-art-footer .big-symbol{font-family:var(--serif);font-size:30px;color:#d8eaba}.paper-content{padding:34px 38px 30px;display:flex;flex-direction:column;justify-content:center}.paper-kicker{display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:9px;letter-spacing:1.3px;color:var(--green);margin-bottom:16px}.dot-separator{opacity:.4}.paper h3{font-family:var(--serif);font-size:32px;line-height:1.15;letter-spacing:-.6px;font-weight:400;margin:0 0 17px}.authors{font-size:11px;color:var(--muted);line-height:1.8;margin:0 0 16px}.authors strong{font-weight:600;color:var(--ink);border-bottom:1px solid var(--line)}.paper-abstract{font-size:12px;color:var(--muted);line-height:1.95;margin:0 0 21px;max-width:520px}.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}.tag{border:1px solid var(--line);padding:2px 7px;font-size:9px;line-height:1.7;color:var(--muted)}.paper-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}.paper-links .text-link{font-size:10px}.paper-links .paper-main-link{border-color:var(--green);color:var(--green)}.cite-button{font-size:10px;border-bottom:1px solid var(--line);padding:9px 0;display:inline-flex;gap:8px;align-items:center}.paper-footnote{display:flex;justify-content:space-between;gap:20px;padding:13px 0 0;color:var(--muted);font-size:9px}.paper-footnote a{border-bottom:1px solid var(--line)}
+/* Research interests */
+.interests-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.interest{padding:29px 26px 31px 0;min-width:0}.interest+.interest{padding-left:30px;border-left:1px solid var(--line)}.interest-top{display:flex;align-items:center;justify-content:space-between;color:var(--green);margin-bottom:27px}.interest-top .mono{font-size:9px;color:var(--muted)}.interest-icon{width:47px;height:37px;stroke:currentColor;stroke-width:1.4;fill:none}.interest h3{font-family:var(--serif);font-size:26px;line-height:1.2;letter-spacing:-.7px;margin:0 0 12px;font-weight:400}.interest p{font-size:12px;color:var(--muted);line-height:1.9;margin:0 0 24px}.interest-footer{font-family:var(--mono);font-size:9px;letter-spacing:.5px;color:var(--green)}.section-note{font-size:10px;color:var(--muted);margin:13px 0 0}
+/* Biography and education */
+.about-layout{display:grid;grid-template-columns:31.5% 68.5%;gap:0}.about-aside{padding-right:55px}.about-title{font-family:var(--serif);font-weight:400;font-size:42px;line-height:1.1;letter-spacing:-1.4px;margin:0 0 20px}.about-title em{color:var(--green);font-weight:400}.about-intro{font-size:12px;line-height:1.95;color:var(--muted);margin:0 0 25px}.about-side-detail{padding-top:20px;border-top:1px solid var(--line);color:var(--green)}.about-side-detail span{display:block;font-size:10px;margin-top:7px;color:var(--muted)}.education-item{display:grid;grid-template-columns:100px 1fr;gap:25px;padding:26px 0;border-top:1px solid var(--line)}.education-item:last-child{border-bottom:1px solid var(--line)}.education-time{font-family:var(--mono);font-size:9px;letter-spacing:.5px;color:var(--muted);padding-top:6px;line-height:1.9}.edu-now{display:inline-flex;align-items:center;gap:6px;color:var(--green)}.edu-now:before{content:'';height:5px;width:5px;background:var(--green);border-radius:50%}.education-title-row{display:flex;justify-content:space-between;gap:20px}.education-title-row h3{font-family:var(--serif);font-weight:400;font-size:27px;line-height:1.3;letter-spacing:-.6px;margin:0 0 7px}.education-location{font-size:9px;white-space:nowrap;color:var(--muted);padding-top:9px}.education-degree{font-size:12px;margin:0 0 7px}.education-detail{font-size:11px;line-height:1.9;color:var(--muted);margin:0;max-width:450px}.off-screen{margin-top:29px;display:grid;grid-template-columns:100px 1fr;gap:25px;font-size:11px;color:var(--muted)}.off-screen .mono{font-size:9px;padding-top:2px}.personal-tags{display:flex;gap:9px 18px;flex-wrap:wrap}.personal-tags span{display:inline-flex;align-items:center;gap:7px}.personal-tags span:before{content:'↗';font-size:12px;color:var(--green)}
+/* Notebook */
+.notebook-section{border-top:1px solid var(--line);padding-top:45px}.notebook-list{margin-left:31.5%;border-top:1px solid var(--line)}.note{border-bottom:1px solid var(--line)}.note summary{display:grid;grid-template-columns:27px 1fr 27px;gap:15px;align-items:center;cursor:pointer;padding:24px 0;list-style:none}.note summary::-webkit-details-marker{display:none}.note-index{font-family:var(--mono);font-size:9px;color:var(--muted)}.note-category{font-family:var(--mono);font-size:8px;letter-spacing:1.2px;color:var(--green);margin-bottom:5px}.note h3{font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:-.4px;line-height:1.3;margin:0}.note-expand{font-size:22px;color:var(--green);text-align:right;transition:transform .2s}.note[open] .note-expand{transform:rotate(45deg)}.note-body{padding:0 35px 27px 42px;font-size:12px;line-height:2;color:var(--muted)}.note-body p{margin:0 0 15px}.note-question{padding-left:16px;border-left:2px solid var(--green);font-family:var(--serif);font-size:19px;color:var(--ink);line-height:1.6}.notebook-list+.section-note{margin-left:31.5%}
+/* Contact */
+.contact-section{border-top:1px solid var(--line);padding-top:38px;padding-bottom:30px;scroll-margin-top:110px}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:end;padding:37px 0 50px}.contact-grid h2{font-family:var(--serif);font-size:64px;line-height:1.04;letter-spacing:-2.8px;font-weight:400;margin:0}.contact-grid h2 em{color:var(--green);font-weight:400}.contact-details{padding-bottom:5px}.contact-description{font-size:12px;color:var(--muted);line-height:1.95;max-width:420px;margin:0 0 20px}.email-row{display:flex;align-items:center;gap:15px;flex-wrap:wrap}.email-link{font-family:var(--serif);font-size:26px;letter-spacing:-.5px;border-bottom:1px solid var(--line);padding-bottom:5px;display:flex;align-items:center;gap:18px}.copy-email{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line);position:relative}.contact-other{margin-top:22px;display:flex;align-items:center;gap:25px;color:var(--muted)}.contact-other a{display:flex;align-items:center;gap:8px;font-size:10px}.contact-other a:hover{color:var(--ink)}.footer-meta{padding:18px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:.4px}.footer-meta a{display:inline-flex;gap:10px}.footer-word{overflow:hidden;padding-top:19px;padding-bottom:6px;line-height:.93;font-family:var(--serif);font-size:clamp(80px,16.8vw,244px);letter-spacing:-.055em;text-align:center;color:var(--green);user-select:none}.footer-word em{font-weight:400}.footer-dot{color:var(--ink)}
+/* Dialog / feedback */
+.citation-dialog{padding:0;width:min(650px,calc(100vw - 36px));border:1px solid var(--line);background:var(--paper);color:var(--ink);box-shadow:0 30px 100px #0003}.citation-dialog::backdrop{background:#10251bd0;backdrop-filter:blur(6px)}.dialog-inner{padding:28px}.dialog-header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:15px}.dialog-header h2{font-family:var(--serif);font-size:27px;font-weight:400;margin:0}.dialog-close{font-size:25px;line-height:1;width:30px;height:30px}.citation-dialog pre{font-family:var(--mono);font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.9;padding:18px;background:var(--surface);border:1px solid var(--line);max-height:55vh;overflow:auto}.dialog-actions{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:20px}.dialog-hint{font-size:10px;color:var(--muted)}.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);padding:11px 20px;background:var(--ink);color:var(--paper);font-size:11px;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 6px 35px #0002;max-width:calc(100vw - 40px);text-align:center}.toast.visible{opacity:1;transform:translate(-50%,0)}.js-ready .reveal{opacity:0;transform:translateY(16px);transition:opacity .65s,transform .65s}.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
+/* Chinese typography is tuned separately rather than squeezed into Latin metrics. */
+html[lang=zh-CN] .hero-line{font-size:25px;line-height:1.5}html[lang=zh-CN] .section-heading h2{font-size:37px;line-height:1.35;letter-spacing:0}html[lang=zh-CN] .interest h3{font-size:24px;letter-spacing:0}html[lang=zh-CN] .about-title{font-size:35px;line-height:1.4;letter-spacing:0}html[lang=zh-CN] .contact-grid h2{font-size:51px;line-height:1.35;letter-spacing:0}html[lang=zh-CN] .note h3{font-size:21px;line-height:1.6;letter-spacing:0}html[lang=zh-CN] .education-title-row h3{font-size:23px;letter-spacing:0}
+@media(min-width:1600px){.hero-grid{min-height:660px}.hero h1{font-size:130px}.figure-panel{height:530px}}
+@media(max-width:1100px){.wrap{width:calc(100% - 70px)}.nav-links{gap:22px;margin-right:20px}.hero-grid{gap:20px;min-height:600px}.hero h1{font-size:98px}.hero-description{font-size:12px}.hero-line{font-size:26px}.figure-panel{height:475px}.figure-title{font-size:8px;letter-spacing:.7px}.section-heading h2{font-size:39px}.paper-content{padding:27px}.paper h3{font-size:29px}.paper-links{gap:18px}.about-aside{padding-right:30px}.education-item{grid-template-columns:85px 1fr;gap:15px}.education-title-row{display:block}.education-location{padding-top:0;margin:2px 0 7px}.contact-grid{gap:40px}.contact-grid h2{font-size:57px}.email-link{font-size:23px}.summary-item+.summary-item{padding-left:20px}.summary-text{font-size:11px}.hero-bottom{gap:20px}}
+@media(max-width:800px){.wrap{width:calc(100% - 42px)}.header-inner{height:70px}.brand-word{font-size:22px}.brand-symbol{width:29px;height:29px}.nav-links{gap:18px;margin-right:6px}.nav-tools{gap:12px}.hero{padding-top:26px}.local-time{font-size:8px}.status{font-size:8px;letter-spacing:1px}.hero-grid{grid-template-columns:1fr 1fr;gap:15px;min-height:552px;padding-top:27px}.hero h1{font-size:83px;letter-spacing:-5px}.chinese-name{font-size:14px;letter-spacing:3px}.name-second{gap:17px}.hero-line{font-size:23px}.hero-description{font-size:11px}.hero-actions{gap:14px}.button{font-size:10px;padding:10px 13px;gap:16px}.text-link{font-size:10px}.eyebrow{font-size:8px;letter-spacing:.9px}.figure-panel{height:431px}.figure-head{align-items:flex-start;flex-direction:column;gap:9px}.figure-tabs{align-self:flex-end}.figure-title{font-size:8px}.formula{top:87px;font-size:13px}.figure-caption{font-size:8px}.figure-hint{font-size:8px}.graph-readout .signal-key{display:none}.summary-item{grid-template-columns:15px 1fr;gap:9px}.summary-title{font-size:8px;letter-spacing:.8px}.summary-text{font-size:10px}.summary-sub{font-size:9px}.hero-bottom{margin-bottom:60px;padding:20px 0;gap:15px}.summary-item+.summary-item{padding-left:15px}.section{padding-bottom:60px}.section-heading h2{font-size:35px}.section-heading .heading-right{width:68%;align-items:start}.tiny-tag{display:none}.section-label{font-size:9px;letter-spacing:.9px;gap:10px}.paper{grid-template-columns:38% 62%}.paper-content{padding:25px 23px}.paper h3{font-size:25px}.paper-art{padding:20px 16px;min-height:430px}.paper-art-top{font-size:7px;gap:8px;flex-wrap:wrap}.paper-art-tag{font-size:7px}.paper-art-footer{font-size:7px;gap:8px}.paper-abstract{font-size:11px}.authors{font-size:10px}.paper-links{gap:15px}.paper-links .text-link,.cite-button{font-size:9px}.paper-footnote{font-size:8px}.interest{padding-right:17px}.interest+.interest{padding-left:19px}.interest h3{font-size:23px}.interest p{font-size:11px}.interest-footer{font-size:8px}.about-aside{padding-right:25px}.about-title{font-size:34px}.about-intro{font-size:11px}.education-item{grid-template-columns:73px 1fr;gap:13px}.education-time{font-size:8px}.education-title-row h3{font-size:24px}.education-degree{font-size:11px}.education-detail{font-size:10px}.off-screen{grid-template-columns:73px 1fr;gap:13px}.note h3{font-size:22px}.note-category{font-size:7px}.contact-grid h2{font-size:48px}.contact-description{font-size:11px}.email-link{font-size:21px;gap:10px}.copy-email{width:27px;height:27px}.contact-grid{gap:30px}.contact-other{gap:17px}.footer-meta{font-size:8px}.footer-word{padding-top:22px}html[lang=zh-CN] .section-heading h2{font-size:31px}html[lang=zh-CN] .contact-grid h2{font-size:42px}html[lang=zh-CN] .hero-line{font-size:21px}html[lang=zh-CN] .about-title{font-size:30px}}
+@media(max-width:620px){html{scroll-padding-top:82px}.header-inner{height:66px;gap:12px}.brand{gap:8px}.brand-word{font-size:23px}.brand-symbol{width:28px;height:28px}.nav-tools{gap:14px}.tool-rule{display:none}.mobile-toggle{display:block}.nav-links{display:none;position:absolute;top:65px;left:0;right:0;margin:0;padding:14px 22px 20px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 18px 20px #00000008}.nav-links.open{display:flex;flex-direction:column;align-items:stretch;gap:5px}.nav-links a{font-size:13px;padding:11px 0}.nav-links a:after{display:none}.language{font-size:10px}.language span[aria-hidden]{margin:0 5px}.hero{padding-top:25px}.hero-topline{gap:8px;align-items:flex-start}.status{font-size:7px;letter-spacing:.7px;gap:8px}.local-time{font-size:7px;letter-spacing:.4px}.hero-grid{display:flex;flex-direction:column;gap:21px;min-height:0;padding-top:35px;padding-bottom:25px;align-items:stretch}.hero-copy{padding:0}.eyebrow{font-size:8px;letter-spacing:1.2px;margin-bottom:19px}.hero h1{font-size:104px;letter-spacing:-6px;line-height:.88;margin-bottom:22px}.name-second{margin-top:7px;gap:25px}.chinese-name{font-size:16px;letter-spacing:5px}.alias{font-size:8px;letter-spacing:1.8px;margin-top:18px}.hero-line{font-size:26px;line-height:1.3;margin-bottom:14px;max-width:320px}.hero-description{font-size:12px;line-height:1.9;max-width:470px;margin-bottom:23px}.hero-actions{gap:24px}.button{font-size:11px;padding:11px 17px;gap:25px}.text-link{font-size:11px}.hero-figure{margin-top:9px}.figure-panel{height:371px}.figure-head{flex-direction:row;align-items:center;top:13px}.figure-title{font-size:8px;letter-spacing:1px}.figure-tabs{align-self:auto}.figure-tabs button{min-width:44px;font-size:8px}.formula{top:66px;font-size:14px}.axis-note{font-size:8px;bottom:72px}.axis-note:before{font-size:15px;margin-bottom:3px}.graph-readout{bottom:11px}.graph-readout span{font-size:8px}.graph-readout .signal-key{display:inline}.figure-caption{padding-top:11px}.figure-caption .mono{font-size:8px}.figure-hint{max-width:160px}.hero-bottom{grid-template-columns:1fr;margin-top:0;margin-bottom:48px;padding:4px 0;gap:0}.summary-item{grid-template-columns:22px 1fr;gap:13px;padding:15px 0;align-items:start}.summary-item+.summary-item{border-left:0;border-top:1px solid var(--line);padding-left:0}.summary-item>div:last-child{display:grid;grid-template-columns:88px 1fr;gap:0 9px}.summary-title{font-size:8px;padding-top:2px;grid-row:1/3;margin-bottom:0}.summary-index{font-size:8px}.summary-text{font-size:11px;line-height:1.5}.summary-sub{font-size:9px;margin-top:3px}.section{padding-bottom:48px;scroll-margin-top:88px}.section-heading{display:block;margin-bottom:23px}.section-label{font-size:9px;letter-spacing:1.2px;gap:13px;padding:0;margin-bottom:17px}.section-heading .heading-right{width:100%}.section-heading h2{font-size:38px;line-height:1.15}.paper{display:flex;flex-direction:column}.paper-art{min-height:0;height:295px;padding:18px 20px 15px}.paper-art-top{font-size:8px}.paper-art-tag{font-size:8px}.tree-viz{height:202px;width:100%;margin:-3px 0 -8px}.paper-art-footer{font-size:8px;line-height:1.5;align-items:center}.paper-art-footer .big-symbol{font-size:23px}.paper-content{padding:24px 21px 22px}.paper-kicker{font-size:8px;margin-bottom:13px}.paper h3{font-size:28px;line-height:1.15;margin-bottom:15px}.authors{font-size:10px}.paper-abstract{font-size:12px;margin-bottom:19px}.tag-row{gap:5px;margin-bottom:19px}.tag{font-size:8px}.paper-links{gap:22px}.paper-links .text-link,.cite-button{font-size:10px}.paper-footnote{flex-direction:column;gap:5px;font-size:8px;padding-top:11px}.interests-grid{grid-template-columns:1fr}.interest{padding:24px 0;display:grid;grid-template-columns:54px 1fr;gap:0 18px}.interest+.interest{padding-left:0;border-left:0;border-top:1px solid var(--line)}.interest-top{grid-row:1/4;display:flex;flex-direction:column;justify-content:flex-start;gap:17px;align-items:flex-start;margin:0;padding-top:3px}.interest-icon{width:41px;height:35px}.interest h3{font-size:26px;margin-bottom:10px}.interest p{font-size:12px;margin-bottom:15px}.interest-footer{font-size:8px}.section-note{font-size:9px;line-height:1.8}.about-layout{grid-template-columns:1fr}.about-aside{padding-right:0}.about-title{font-size:38px;margin-bottom:15px}.about-intro{font-size:12px;margin-bottom:21px;max-width:480px}.about-side-detail{display:none}.education-item{grid-template-columns:72px 1fr;gap:17px;padding:23px 0}.education-time{font-size:8px}.education-title-row h3{font-size:25px;line-height:1.25;margin-bottom:6px}.education-location{font-size:9px;margin-bottom:7px}.education-degree{font-size:11px}.education-detail{font-size:11px;line-height:1.85}.off-screen{grid-template-columns:72px 1fr;gap:17px;font-size:10px;margin-top:21px}.off-screen .mono{font-size:8px}.personal-tags{gap:5px 14px}.notebook-section{padding-top:32px}.notebook-list{margin-left:0}.note summary{padding:21px 0;grid-template-columns:20px 1fr 20px;gap:11px}.note h3{font-size:24px}.note-category{font-size:7px;letter-spacing:1px;margin-bottom:7px}.note-body{padding:0 15px 24px 31px;font-size:12px}.note-question{font-size:18px}.notebook-list+.section-note{margin-left:0}.contact-section{padding-top:29px;padding-bottom:22px;scroll-margin-top:88px}.contact-grid{grid-template-columns:1fr;gap:24px;padding:11px 0 34px}.contact-grid h2{font-size:55px;line-height:1.06;letter-spacing:-2px}.contact-description{font-size:12px;margin-bottom:15px;max-width:450px}.email-link{font-size:25px;gap:17px}.email-row{gap:15px}.copy-email{width:30px;height:30px}.contact-other{margin-top:20px;gap:26px}.footer-meta{font-size:7px;line-height:1.8;gap:15px;padding:15px 0}.footer-meta .footer-built{display:none}.footer-word{font-size:18vw;letter-spacing:-.065em;text-align:left;padding-top:10px;padding-bottom:4px}.dialog-inner{padding:21px}.dialog-actions{align-items:flex-start;flex-direction:column}.citation-dialog pre{font-size:10px}html[lang=zh-CN] .hero-line{font-size:24px}html[lang=zh-CN] .section-heading h2{font-size:33px;line-height:1.35}html[lang=zh-CN] .about-title{font-size:32px}html[lang=zh-CN] .contact-grid h2{font-size:44px}html[lang=zh-CN] .note h3{font-size:21px}html[lang=zh-CN] .education-title-row h3{font-size:23px}}
+@media(max-width:360px){.wrap{width:calc(100% - 32px)}.nav-tools{gap:10px}.hero h1{font-size:94px}.figure-title{font-size:7px;letter-spacing:.5px}.figure-tabs button{min-width:38px;padding:3px 6px}.email-link{font-size:22px}.paper-links{gap:17px}.figure-panel{height:350px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.js-ready .reveal{opacity:1;transform:none}}
+@media print{.site-header,.hero-figure,.hero-actions,.contact-other,.copy-email,.footer-word,.figure-hint,.paper-art,.nav-tools,.notebook-section,.toast,.citation-dialog{display:none!important}body{background:white;color:black;font-size:11pt}.wrap{width:100%}.hero,.hero-grid{padding:0;display:block;min-height:0}.hero h1{font-size:50px;line-height:1;margin:20px 0}.hero h1 br{display:none}.name-second{display:inline-flex;margin:0 0 0 14px}.alias{font-size:9px}.hero-topline{margin-bottom:10px}.hero-copy{padding:0}.hero-description{max-width:none}.hero-bottom{margin:24px 0}.section{padding-bottom:30px;break-inside:avoid}.section-heading{margin-bottom:15px}.section-heading h2{font-size:25px}.paper{display:block}.paper-content{padding:20px}.paper h3{font-size:24px}.paper-abstract{max-width:none}.paper-links{display:none}.interest p,.education-detail{font-size:10pt}.contact-grid{padding:10px 0 20px}.contact-grid h2{font-size:35px}.email-link{font-size:18px}.reveal{opacity:1!important;transform:none!important}.footer-meta{font-size:8px}}
+
+/* Work — bibliographic list, keeping publication and review status distinct. */
+[hidden]{display:none!important}.legacy-anchor{display:block;position:relative;top:-100px;visibility:hidden}
+.work-toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:0 0 31px;flex-wrap:wrap}
+.work-intro{font-size:12px;color:var(--muted);margin:0;max-width:420px;line-height:1.8}
+.work-filters{display:flex;gap:4px;flex-wrap:wrap;border:1px solid var(--line);padding:4px}
+.work-filters button{display:inline-flex;align-items:center;gap:9px;min-height:35px;padding:7px 12px;font-size:10px;white-space:nowrap}
+.work-filters button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.work-filters button:hover:not([aria-pressed=true]){background:var(--wash)}
+.filter-count{font-family:var(--mono);font-size:9px;opacity:.67}
+.work-group-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:18px;padding-top:5px}
+.work-group-heading h3{font-size:12px;font-weight:500;letter-spacing:.3px;line-height:1.6;margin:0}
+.work-group-heading>.mono{color:var(--muted)}
+.equal-contribution{font-size:10px;color:var(--muted);line-height:1.6;margin:-10px 0 18px}
+.work-status{display:inline-block;padding:3px 8px;font-size:9px;border:1px solid var(--line);font-family:var(--mono);letter-spacing:.3px;line-height:1.6;color:var(--green);white-space:nowrap}
+.featured-status{align-self:flex-start;background:var(--wash);margin-bottom:16px}
+.publications-list{border-top:1px solid var(--line);margin-top:25px}
+.publication-row{display:grid;grid-template-columns:80px minmax(0,1fr);gap:25px;padding:32px 0;border-bottom:1px solid var(--line)}
+.publication-index{display:flex;flex-direction:column;gap:15px;color:var(--muted);padding-top:4px}
+.publication-index>.mono{font-size:9px}.publication-year{font-family:var(--serif);font-size:24px;line-height:1;color:var(--green)}
+.publication-body{min-width:0}.publication-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:13px}
+.publication-venue{font-size:10px;font-family:var(--mono);letter-spacing:.3px;color:var(--green);line-height:1.75}
+.work-role{color:var(--muted);font-size:10px}
+.publication-row h3{font-family:var(--serif);font-size:27px;letter-spacing:-.3px;line-height:1.25;font-weight:400;margin:0 0 14px;max-width:1070px;overflow-wrap:break-word}
+.publication-row .authors{font-size:11px;margin-bottom:8px;line-height:1.8}
+.publication-detail{font-size:10px;color:var(--muted);margin:0 0 12px;line-height:1.8}
+.publication-links{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.publication-links .text-link{font-size:10px;padding:5px 0}.publication-links .cite-button{font-size:10px;min-height:30px}
+.work-link-note{font-size:10px;color:var(--muted)}.review-group{margin-top:43px}
+.review-group .work-group-heading{margin-bottom:8px}.review-description{font-size:11px;color:var(--muted);max-width:860px;line-height:1.9;margin:0 0 15px}
+.review-group .publications-list{margin-top:18px}.status-under-review{color:var(--muted);border-style:dashed}
+.citation-work-title{font-family:var(--serif);font-size:19px;line-height:1.4;margin:8px 0 18px}
+@media(max-width:960px){.work-toolbar{align-items:flex-start;gap:14px}.publication-row{grid-template-columns:60px minmax(0,1fr);gap:20px}.publication-row h3{font-size:25px}.publication-meta{gap:9px}.work-group-heading h3{font-size:11px}}
+@media(max-width:620px){.work-toolbar{margin-bottom:25px;gap:14px;display:block}.work-intro{font-size:11px;margin-bottom:16px}.work-filters{width:100%;gap:3px;justify-content:space-between}.work-filters button{font-size:9px;padding:7px 9px;gap:6px;min-height:36px}.filter-count{font-size:8px}.work-group-heading h3{font-size:11px}.work-group-heading{gap:12px}.equal-contribution{font-size:9px}.publication-row{grid-template-columns:36px minmax(0,1fr);gap:13px;padding:25px 0}.publication-year{font-size:17px}.publication-index{gap:11px}.publication-index>.mono{font-size:8px}.publication-row h3{font-size:23px;line-height:1.28;letter-spacing:-.2px}.publication-venue{font-size:9px}.publication-meta{gap:7px;margin-bottom:12px}.work-status{font-size:8px}.publication-row .authors{font-size:10px}.publication-detail{font-size:9px}.publication-links{gap:16px}.work-link-note{font-size:9px;line-height:1.8}.review-group{margin-top:31px}.review-description{font-size:10px}.citation-work-title{font-size:18px}.publications-list{margin-top:20px}.featured-status{margin-bottom:13px}}
+@media(max-width:360px){.work-filters button{padding:7px 7px;gap:4px;font-size:8px}.publication-row h3{font-size:21px}}
+@media print{.work-filters,.publication-links{display:none!important}.publication-row{break-inside:avoid;grid-template-columns:50px minmax(0,1fr);padding:18px 0}.work-group[hidden]{display:block!important}.publication-row h3{font-size:17pt}.work-group-heading{break-after:avoid}.review-description{break-after:avoid}#work{break-inside:auto}.featured-status{color:black}.publication-venue{color:black}}
+
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Yihan Wu","alternateName":["Caracalla","吴屹瀚"],"email":"mailto:yw4788@columbia.edu","affiliation":{"@type":"CollegeOrUniversity","name":"Columbia University"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Shanghai Jiao Tong University"},"sameAs":["https://github.com/caracallium"],"knowsAbout":["Graph learning","Time series","Statistics","Spatiotemporal modeling"]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="site-header">
+ <div class="wrap header-inner">
+  <a class="brand" href="#top" aria-label="Caracalla home">
+   <svg class="brand-symbol" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width=".8"/><path d="M26.5 10.5a11.5 11.5 0 1 0 0 19M25.5 15a6.5 6.5 0 1 0 0 10" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="29" cy="20" r="1.8" fill="currentColor"/></svg>
+   <span class="brand-word">caracalla<span class="brand-dot">.</span></span>
+  </a>
+  <nav class="nav-links" id="navigation" aria-label="Main navigation">
+   <a href="#work" data-i18n="navResearch">Work</a>
+   <a href="#about" data-i18n="navAbout">About</a>
+   <a href="#notebook" data-i18n="navNotebook">Notebook</a>
+   <a href="#contact" data-i18n="navContact">Contact</a>
+  </nav>
+  <div class="nav-tools">
+   <button class="language" id="language-toggle" aria-label="Switch to Chinese"><b id="en-label">EN</b><span aria-hidden="true">/</span><span id="zh-label">中</span></button>
+   <span class="tool-rule" aria-hidden="true"></span>
+   <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+    <svg class="icon moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg>
+    <svg class="icon sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+   </button>
+   <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="navigation"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+  </div>
+ </div>
+</header>
+<main id="main">
+ <section class="hero wrap" aria-labelledby="hero-name">
+  <div class="hero-topline">
+   <div class="status"><span class="status-dot" aria-hidden="true"></span><span data-i18n="status">A PERSONAL SPACE FOR RESEARCH & CURIOSITY</span></div>
+   <div class="local-time"><span data-i18n="newYork">NEW YORK</span> <span aria-hidden="true">↗</span> <time id="ny-clock">—:—</time></div>
+  </div>
+  <div class="hero-grid">
+   <div class="hero-copy">
+    <p class="eyebrow" data-i18n="heroEyebrow">STATISTICS / GRAPH LEARNING / TIME SERIES</p>
+    <h1 id="hero-name">Yihan<br><span class="name-second"><em>Wu.</em><span class="chinese-name" lang="zh-CN">吴屹瀚</span></span><span class="alias">ALSO KNOWN AS CARACALLA</span></h1>
+    <p class="hero-line"><span data-i18n="heroLine1">Structure, signals,</span><br><span data-i18n="heroLine2">and everything between.</span></p>
+    <p class="hero-description"><span data-i18n="heroBio1">I’m a master’s student in Statistics at </span><strong data-i18n="columbia">Columbia University</strong><span data-i18n="heroBio2">, interested in how graph structure and temporal dynamics can help us learn from complex data.</span></p>
+    <div class="hero-actions"><a class="button button-primary" href="#work"><span data-i18n="exploreResearch">Explore my research</span><span class="arrow" aria-hidden="true">↗</span></a><a class="text-link" href="#contact"><span data-i18n="getInTouch">Get in touch</span><span aria-hidden="true">↗</span></a></div>
+   </div>
+   <figure class="hero-figure" aria-labelledby="graph-caption">
+    <div class="figure-panel">
+     <div class="figure-head"><span class="figure-title mono" data-i18n="figureTitle">THE SHAPE OF CONNECTION</span><div class="figure-tabs" role="group" aria-label="Visualization mode"><button data-view="graph" aria-pressed="true" data-i18n="viewGraph">Graph</button><button data-view="tree" aria-pressed="false" data-i18n="viewTree">Tree</button><button data-view="signal" aria-pressed="false" data-i18n="viewSignal">Signal</button></div></div>
+     <span class="formula" aria-hidden="true">G<sub>t</sub> = (V, E, X<sub>t</sub>)</span>
+     <canvas class="graph-canvas" id="graph-canvas" role="img" aria-label="Interactive illustration of a graph, a hierarchy, and synthetic time-series signals. The view buttons offer alternative visualizations. Use the Next node button to change the selected node.">A graph connects nodes with edges; a hierarchy organizes nodes into levels. Synthetic time series illustrate how node signals change over time.</canvas>
+     <span class="axis-note mono" aria-hidden="true">STRUCTURE<br>× TIME</span>
+     <div class="graph-readout"><div><span class="node-marker" aria-hidden="true"></span><button id="next-node" class="pause-button" aria-label="Select next node"><span id="node-label">NODE 07</span><span aria-hidden="true">→</span></button><span class="signal-key" data-i18n="syntheticSignal">synthetic signal x(t)</span></div><button class="pause-button" id="pause-toggle" aria-pressed="false"><span id="pause-icon" aria-hidden="true">Ⅱ</span><span data-i18n="pause" id="pause-label">Pause</span></button></div>
+    </div>
+    <figcaption class="figure-caption" id="graph-caption"><div><span class="mono">FIG. 01</span> <strong data-i18n="figureCaption">Patterns emerge through connection.</strong><br><span class="mono" data-i18n="figureDisclaimer">INTERACTIVE STUDY · SYNTHETIC DATA</span></div><div class="figure-hint" data-i18n="figureHint">Move to rotate. Click a node to follow its signal.</div></figcaption>
+   </figure>
+  </div>
+  <div class="hero-bottom">
+   <div class="summary-item"><span class="summary-index">01</span><div><div class="summary-title" data-i18n="summaryNow">Currently</div><div class="summary-text" data-i18n="summaryNowText">MA in Statistics · Columbia</div><div class="summary-sub" data-i18n="summaryNowSub">New York, United States</div></div></div>
+   <div class="summary-item"><span class="summary-index">02</span><div><div class="summary-title" data-i18n="summaryWork">Selected work</div><div class="summary-text" data-i18n="summaryWorkText">Hierarchical time series · KDD ’26</div><div class="summary-sub" data-i18n="summaryWorkSub">Structure-aware abstraction</div></div></div>
+   <div class="summary-item"><span class="summary-index">03</span><div><div class="summary-title" data-i18n="summaryNext">Looking ahead</div><div class="summary-text" data-i18n="summaryNextText">Graph-structured & temporal AI</div><div class="summary-sub" data-i18n="summaryNextSub">Learning, understanding, exploring</div></div></div>
+  </div>
+ </section>
+ <section class="section wrap" id="work" aria-labelledby="research-title">
+  <span id="research" class="legacy-anchor" aria-hidden="true"></span>
+  <div class="section-heading reveal"><div class="section-label"><span class="section-number">01 /</span><span data-i18n="researchLabel">Work &amp; publications</span></div><div class="heading-right"><h2 id="research-title"><span data-i18n="researchTitle1">A little structure.</span><br><em data-i18n="researchTitle2">A bigger picture.</em></h2><span class="tiny-tag" data-i18n="researchTag">2024 — 2026</span></div></div>
+  <div class="work-toolbar reveal">
+   <p class="work-intro" data-i18n="workIntro">Publications, accepted articles, and manuscripts in progress.</p>
+   <div class="work-filters" role="group" aria-label="Filter research works" hidden>
+    <button type="button" data-work-filter="all" aria-pressed="true"><span data-i18n="filterAll">All</span><span class="filter-count">7</span></button>
+    <button type="button" data-work-filter="published" aria-pressed="false"><span data-i18n="filterPublished">Published / accepted</span><span class="filter-count">4</span></button>
+    <button type="button" data-work-filter="under-review" aria-pressed="false"><span data-i18n="filterReview">Under review</span><span class="filter-count">3</span></button>
+   </div>
+   <span class="sr-only" id="work-filter-status" aria-live="polite"></span>
+  </div>
+  <div class="work-group" data-work-group="published">
+   <div class="work-group-heading"><h3 data-i18n="publishedHeading">Peer-reviewed publications &amp; accepted articles</h3><span class="mono">04</span></div>
+  <article class="paper reveal">
+   <div class="paper-art" role="img" aria-label="Conceptual illustration of a hierarchy with highlighted subtrees and time-series signals, not an experimental result.">
+    <div class="paper-art-top"><span>HIERARCHICAL TIME SERIES</span><span class="paper-art-tag">KDD 2026</span></div>
+    <svg class="tree-viz" viewBox="0 0 400 285" aria-hidden="true">
+     <defs><pattern id="tree-grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#bad291" opacity=".19"/></pattern></defs>
+     <rect x="0" y="0" width="400" height="285" fill="url(#tree-grid)"/>
+     <path class="tree-area" d="M45 84Q47 75 60 75H136Q149 76 151 92L187 239Q190 253 175 256H16Q2 253 5 239Z"/>
+     <path class="tree-area" d="M280 153Q283 139 297 140H325Q337 140 340 155L376 239Q381 254 365 256H256Q244 254 248 239Z"/>
+     <path class="tree-line" d="M200 35L100 104M200 35L300 104M100 104L51 174M100 104L149 174M300 104L251 174M300 104L349 174M51 174L25 239M51 174L75 239M149 174L125 239M149 174L173 239M251 174L226 239M251 174L276 239M349 174L323 239M349 174L374 239"/>
+     <path class="tree-line-active" d="M100 104L51 174L25 239M51 174L75 239M100 104L149 174L125 239M149 174L173 239M349 174L323 239M349 174L374 239"/>
+     <g class="tree-dot"><circle cx="200" cy="35" r="9"/><circle cx="300" cy="104" r="8"/><circle cx="251" cy="174" r="7"/><circle cx="226" cy="239" r="5"/><circle cx="276" cy="239" r="5"/></g>
+     <g class="tree-dot-active"><circle cx="100" cy="104" r="9"/><circle cx="51" cy="174" r="7"/><circle cx="149" cy="174" r="7"/><circle cx="25" cy="239" r="5"/><circle cx="75" cy="239" r="5"/><circle cx="125" cy="239" r="5"/><circle cx="173" cy="239" r="5"/><circle cx="349" cy="174" r="8"/><circle cx="323" cy="239" r="5"/><circle cx="374" cy="239" r="5"/></g>
+     <g class="tree-wave"><path d="M217 33l5-4 4 9 5-14 5 8 5-3 4 6 5-8 5 3"/><path d="M113 94l4-2 4 7 4-12 4 9 4-4 4 5 4-9"/><path d="M264 163l4-2 4 7 4-12 4 9 4-4 4 5 4-9"/><path d="M67 166l4-2 4 7 4-12 4 9 4-4 4 5 4-9"/></g>
+     <g fill="#bfcca9" font-family="monospace" font-size="8"><text x="29" y="25">T = (V, E)</text><text x="21" y="275">SUBTREE A</text><text x="290" y="275">SUBTREE B</text><text x="279" y="60">xᵥ(t) ~ ~ ~</text></g>
+    </svg>
+    <div class="paper-art-footer"><span data-i18n="treeCaption">PRESERVE THE STRUCTURE.<br>KEEP THE SIGNAL.</span><span class="big-symbol" aria-hidden="true">T → T′</span></div>
+   </div>
+   <div class="paper-content">
+    <span class="work-status featured-status" data-i18n="statusPublished">Published</span>
+    <div class="paper-kicker"><span>KDD ’26</span><span class="dot-separator">/</span><span data-i18n="paperTrack">RESEARCH TRACK</span><span class="dot-separator">/</span><span data-i18n="paperAuthor">CO-FIRST AUTHOR</span></div>
+    <h3>Structure-Aware Abstraction of Hierarchical Time Series</h3>
+    <p class="authors"><strong>Yihan Wu<sup>*</sup></strong>, Xuliang Zhu<sup>*</sup>, Guozhong Li, Kai Wang, Xuemin Lin</p>
+    <p class="equal-contribution" data-i18n="equalContribution">*Equal contribution.</p>
+    <p class="paper-abstract" data-i18n="paperAbstract">How can we summarize time series without losing the hierarchy that connects them? This work studies structure-aware abstraction, selecting representative subgraphs that balance temporal similarity and node values. The open-source artifact includes V-Greedy, P-Greedy, and OSS.</p>
+    <div class="tag-row"><span class="tag">Time-series abstraction</span><span class="tag">Hierarchical data</span><span class="tag">Graph algorithms</span></div>
+    <div class="paper-links"><a class="text-link paper-main-link" href="https://doi.org/10.1145/3770855.3817713" target="_blank" rel="noopener noreferrer"><span data-i18n="readPaper">Read paper</span><span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/caracallium/htsa" target="_blank" rel="noopener noreferrer"><span data-i18n="code">Code</span><span aria-hidden="true">↗</span></a><a class="text-link" href="https://zenodo.org/records/20572508" target="_blank" rel="noopener noreferrer"><span data-i18n="artifact">Artifact</span><span aria-hidden="true">↗</span></a><button class="cite-button" id="open-citation" data-citation="htsa" aria-haspopup="dialog"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
+   </div>
+  </article>
+  <div class="paper-footnote"><span>KDD 2026 · pp. 5500–5511 · DOI: 10.1145/3770855.3817713</span><span data-i18n="treeDisclaimer">The diagram is a conceptual illustration, not an experimental result.</span></div>
+
+  <div class="publications-list">
+   <article class="publication-row reveal" id="work-sii-siri" aria-labelledby="title-sii-siri">
+    <div class="publication-index"><span class="mono">02</span><span class="publication-year">2026</span></div>
+    <div class="publication-body">
+     <div class="publication-meta"><span class="publication-venue">Frontiers in Cardiovascular Medicine</span><span class="work-status status-published" data-i18n="statusAccepted">Accepted / in press</span></div>
+     <h3 id="title-sii-siri">Baseline SII and SIRI Identify Immune-Inflammatory Susceptibility and Improve Risk Stratification of Early Subclinical Cardiac Dysfunction during Non-Steroidal Aromatase Inhibitor Therapy</h3>
+     <p class="authors">Cenyu Li, Zhengyu Tao, <strong>Yihan Wu</strong>, Chen Wu, Zi Wang, Xiaoning Wang, Huijuan Dai, Meng Jiang, Jun Pu</p>
+     <p class="publication-detail">2026</p>
+     <div class="publication-links"><a class="text-link work-doi" href="https://doi.org/10.3389/fcvm.2026.1888328" target="_blank" rel="noopener noreferrer"><span data-i18n="publisherLink">Publisher / DOI</span><span aria-hidden="true">↗</span></a><button class="cite-button" data-citation="sii-siri" aria-haspopup="dialog" aria-label="BibTeX: Baseline SII and SIRI Identify Immune-Inflammatory Susceptibility and Improve Risk Stratification of Early Subclinical Cardiac Dysfunction during Non-Steroidal Aromatase Inhibitor Therapy"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
+    </div>
+   </article>
+   <article class="publication-row reveal" id="work-portfolios" aria-labelledby="title-portfolios">
+    <div class="publication-index"><span class="mono">03</span><span class="publication-year">2025</span></div>
+    <div class="publication-body">
+     <div class="publication-meta"><span class="publication-venue">Open Journal of Business and Management</span><span class="work-status status-published" data-i18n="statusPublished">Published</span><span class="work-role" data-i18n="soleAuthor">Sole author</span></div>
+     <h3 id="title-portfolios">Portfolios, Stock Market Indices and Investment Strategies</h3>
+     <p class="authors"><strong>Yihan Wu</strong></p>
+     <p class="publication-detail">13(3): 2099–2119 · 2025</p>
+     <div class="publication-links"><a class="text-link work-doi" href="https://doi.org/10.4236/ojbm.2025.133109" target="_blank" rel="noopener noreferrer"><span data-i18n="publisherLink">Publisher / DOI</span><span aria-hidden="true">↗</span></a><button class="cite-button" data-citation="portfolios" aria-haspopup="dialog" aria-label="BibTeX: Portfolios, Stock Market Indices and Investment Strategies"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
+    </div>
+   </article>
+   <article class="publication-row reveal" id="work-lambda" aria-labelledby="title-lambda">
+    <div class="publication-index"><span class="mono">04</span><span class="publication-year">2024</span></div>
+    <div class="publication-body">
+     <div class="publication-meta"><span class="publication-venue">NeurIPS 2024</span><span class="work-status status-published" data-i18n="statusPublished">Published</span></div>
+     <h3 id="title-lambda">Lambda: Learning Matchable Prior for Entity Alignment with Unlabeled Dangling Cases</h3>
+     <p class="authors">Hang Yin, Liyao Xiang, Dong Ding, Yuheng He, <strong>Yihan Wu</strong>, Pengzhi Chu, Xinbing Wang, Chenghu Zhou</p>
+     <p class="publication-detail">Advances in Neural Information Processing Systems 37 · pp. 78964–78995 · 2024</p>
+     <div class="publication-links"><a class="text-link work-doi" href="https://doi.org/10.52202/079017-2507" target="_blank" rel="noopener noreferrer"><span data-i18n="publisherLink">Publisher / DOI</span><span aria-hidden="true">↗</span></a><button class="cite-button" data-citation="lambda" aria-haspopup="dialog" aria-label="BibTeX: Lambda: Learning Matchable Prior for Entity Alignment with Unlabeled Dangling Cases"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
+    </div>
+   </article>
+  </div>
+  </div>
+  <div class="work-group review-group" data-work-group="under-review">
+   <div class="work-group-heading"><h3 data-i18n="reviewHeading">Manuscripts under review</h3><span class="mono">03</span></div>
+   <p class="review-description" data-i18n="reviewDescription">The works below are under review, not accepted publications. Submission venues are shown separately from publication venues.</p>
+   <div class="publications-list">
+   <article class="publication-row reveal" id="work-btsplit" aria-labelledby="title-btsplit">
+    <div class="publication-index"><span class="mono">05</span><span class="publication-year">2026</span></div>
+    <div class="publication-body">
+     <div class="publication-meta"><span class="publication-venue" data-i18n="reviewVenue">Manuscript under review</span><span class="work-status status-under-review" data-i18n="statusReview">Under review</span></div>
+     <h3 id="title-btsplit">BTSplit: Boundary-Tracking Split for Constraint-Aware Maximum Common Induced Subgraph</h3>
+     <p class="authors"><strong>Yihan Wu</strong>, Zitao Xing, Yixiang Qian, Xuliang Zhu, Kai Wang, Xuemin Lin</p>
+     <p class="publication-detail" data-i18n="manuscript2026">2026 manuscript</p>
+     <div class="publication-links"><span class="work-link-note" data-i18n="manuscriptNoLink">Manuscript under review · No public link provided</span><button class="cite-button" data-citation="btsplit" aria-haspopup="dialog" aria-label="BibTeX: BTSplit: Boundary-Tracking Split for Constraint-Aware Maximum Common Induced Subgraph"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
+    </div>
+   </article>
+   <article class="publication-row reveal" id="work-tsfms" aria-labelledby="title-tsfms">
+    <div class="publication-index"><span class="mono">06</span><span class="publication-year">2026</span></div>
+    <div class="publication-body">
+     <div class="publication-meta"><span class="publication-venue" data-i18n="reviewKDD">Submitted to KDD 2027</span><span class="work-status status-under-review" data-i18n="statusReview">Under review</span></div>
+     <h3 id="title-tsfms">From Forecasting to Classification: Selective Knowledge Transfer with TSFMs</h3>
+     <p class="authors">Guozhong Li, <strong>Yihan Wu</strong>, Rundong Zuo, Xuliang Zhu</p>
+     <p class="publication-detail" data-i18n="manuscript2026">2026 manuscript</p>
+     <div class="publication-links"><span class="work-link-note" data-i18n="manuscriptNoLink">Manuscript under review · No public link provided</span><button class="cite-button" data-citation="tsfms" aria-haspopup="dialog" aria-label="BibTeX: From Forecasting to Classification: Selective Knowledge Transfer with TSFMs"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
+    </div>
+   </article>
+   <article class="publication-row reveal" id="work-entry-point" aria-labelledby="title-entry-point">
+    <div class="publication-index"><span class="mono">07</span><span class="publication-year">2026</span></div>
+    <div class="publication-body">
+     <div class="publication-meta"><span class="publication-venue" data-i18n="reviewTMLR">Submitted to Transactions on Machine Learning Research (TMLR)</span><span class="work-status status-under-review" data-i18n="statusReview">Under review</span></div>
+     <h3 id="title-entry-point">Where a New Concept Must Enter: Entry Point Gates Cross-Task Usability in Unified Multimodal Models</h3>
+     <p class="authors">Zongyang Qiu, <strong>Yihan Wu</strong>, Kaixuan Fan, Bo Li, Hui Xiong</p>
+     <p class="publication-detail" data-i18n="manuscript2026">2026 manuscript</p>
+     <div class="publication-links"><span class="work-link-note" data-i18n="manuscriptNoLink">Manuscript under review · No public link provided</span><button class="cite-button" data-citation="entry-point" aria-haspopup="dialog" aria-label="BibTeX: Where a New Concept Must Enter: Entry Point Gates Cross-Task Usability in Unified Multimodal Models"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
+    </div>
+   </article>
+   </div>
+  </div>
+ </section>
+ <section class="section wrap" id="interests" aria-labelledby="interests-title">
+  <div class="section-heading reveal"><div class="section-label"><span class="section-number">02 /</span><span data-i18n="interestsLabel">Research interests</span></div><div class="heading-right"><h2 id="interests-title"><span data-i18n="interestsTitle1">Following the </span><em data-i18n="interestsTitle2">connections.</em></h2></div></div>
+  <div class="interests-grid reveal">
+   <article class="interest"><div class="interest-top"><svg class="interest-icon" viewBox="0 0 50 40" aria-hidden="true"><path d="M9 10L29 5L43 22L25 34L9 10L43 22M9 10L7 32L25 34L29 5"/><circle cx="9" cy="10" r="3.5" fill="var(--paper)"/><circle cx="29" cy="5" r="3.5" fill="var(--paper)"/><circle cx="43" cy="22" r="3.5" fill="var(--paper)"/><circle cx="25" cy="34" r="3.5" fill="var(--paper)"/><circle cx="7" cy="32" r="3.5" fill="var(--paper)"/></svg><span class="mono">I / STRUCTURE</span></div><h3 data-i18n="interest1Title">Graph learning</h3><p data-i18n="interest1Text">Learning with relational structure, with a particular interest in graph neural networks, meaningful representations, and understanding what a model has learned.</p><div class="interest-footer">GNNs · REPRESENTATION · EXPLAINABILITY</div></article>
+   <article class="interest"><div class="interest-top"><svg class="interest-icon" viewBox="0 0 50 40" aria-hidden="true"><path d="M3 30H48M4 3v32" opacity=".3"/><path d="M5 22C10 22 10 6 16 7S21 32 27 26S32 9 37 12S41 24 48 14"/><path d="M5 27C11 28 12 19 18 22S26 30 31 23S40 15 48 18" opacity=".4"/></svg><span class="mono">II / DYNAMICS</span></div><h3 data-i18n="interest2Title">Time-series intelligence</h3><p data-i18n="interest2Text">Finding useful abstractions of temporal data, especially when individual signals are connected through a hierarchy or a graph rather than existing in isolation.</p><div class="interest-footer">HIERARCHIES · ABSTRACTION · TEMPORAL AI</div></article>
+   <article class="interest"><div class="interest-top"><svg class="interest-icon" viewBox="0 0 50 40" aria-hidden="true"><path d="M7 12L25 3L44 12L25 23ZM7 19L25 30L44 19M7 27L25 38L44 27"/><path d="M7 12v15M25 23v15M44 12v15" opacity=".35"/><circle cx="25" cy="23" r="3" fill="var(--paper)"/></svg><span class="mono">III / INTERACTION</span></div><h3 data-i18n="interest3Title">Spatiotemporal modeling</h3><p data-i18n="interest3Text">Exploring how relationships and signals evolve together, and how statistical learning can connect local interactions with the behavior of a larger system.</p><div class="interest-footer">DYNAMIC GRAPHS · SYSTEMS · STATISTICS</div></article>
+  </div>
+  <p class="section-note" data-i18n="interestsNote">These are directions I’m interested in exploring, not a list of completed projects.</p>
+ </section>
+ <section class="section wrap" id="about" aria-labelledby="about-title">
+  <div class="section-heading reveal"><div class="section-label"><span class="section-number">03 /</span><span data-i18n="aboutLabel">A little background</span></div></div>
+  <div class="about-layout reveal">
+   <div class="about-aside"><h2 class="about-title" id="about-title"><span data-i18n="aboutTitle1">Always a</span><br><em data-i18n="aboutTitle2">student.</em></h2><p class="about-intro" data-i18n="aboutIntro">From Shanghai to New York, I’m building a research path at the intersection of statistics and AI. I like questions that connect a clean mathematical idea to a complex, real-world structure.</p><div class="about-side-detail mono">SHANGHAI → NEW YORK<span data-i18n="aboutAside">Different places. The same curiosity.</span></div></div>
+   <div>
+    <div class="education-item"><div class="education-time">2026 —<br><span class="edu-now" data-i18n="present">PRESENT</span></div><div><div class="education-title-row"><h3 data-i18n="columbia">Columbia University</h3><span class="education-location" data-i18n="educationNY">New York, USA</span></div><p class="education-degree" data-i18n="columbiaDegree">Master of Arts in Statistics</p><p class="education-detail" data-i18n="columbiaDetail">Graduate study in statistics, alongside research interests in graph learning and temporal data.</p></div></div>
+    <div class="education-item"><div class="education-time" data-i18n="undergraduateTime">BEFORE<br>COLUMBIA</div><div><div class="education-title-row"><h3 data-i18n="sjtu">Shanghai Jiao Tong University</h3><span class="education-location" data-i18n="educationSH">Shanghai, China</span></div><p class="education-degree" data-i18n="sjtuDegree">Undergraduate education</p><p class="education-detail" data-i18n="sjtuDetail">The beginning of my research journey, with work on hierarchical time-series abstraction and graph-structured data.</p></div></div>
+    <div class="off-screen"><span class="mono" data-i18n="offScreen">OFF SCREEN</span><div class="personal-tags"><span data-i18n="history">History</span><span data-i18n="museums">Museums</span><span data-i18n="cities">Exploring cities</span></div></div>
+   </div>
+  </div>
+ </section>
+ <section class="section wrap notebook-section" id="notebook" aria-labelledby="notebook-title">
+  <div class="section-heading reveal"><div class="section-label"><span class="section-number">04 /</span><span data-i18n="notebookLabel">Open notebook</span></div><div class="heading-right"><h2 id="notebook-title"><span data-i18n="notebookTitle1">Questions worth </span><em data-i18n="notebookTitle2">keeping.</em></h2></div></div>
+  <div class="notebook-list reveal">
+   <details class="note"><summary><span class="note-index">01</span><div><div class="note-category">GRAPH LEARNING / EXPLAINABILITY</div><h3 data-i18n="note1Title">What should a graph explanation preserve?</h3></div><span class="note-expand" aria-hidden="true">+</span></summary><div class="note-body"><p data-i18n="note1Body">A useful explanation should do more than highlight a few important nodes. I’m interested in whether it retains the relationships behind a prediction, and whether the explanation stays meaningful when the graph changes.</p><div class="note-question" data-i18n="note1Question">Can an explanation be both compact and faithful to the structure?</div></div></details>
+   <details class="note"><summary><span class="note-index">02</span><div><div class="note-category">TIME SERIES / ABSTRACTION</div><h3 data-i18n="note2Title">When does a smaller summary tell a better story?</h3></div><span class="note-expand" aria-hidden="true">+</span></summary><div class="note-body"><p data-i18n="note2Body">Compression alone is not the goal. The question is which temporal patterns and relationships matter for the next decision. A hierarchy offers context, but it also makes the choice of a representative summary more interesting.</p><div class="note-question" data-i18n="note2Question">What can we remove without removing the reason the data matters?</div></div></details>
+   <details class="note"><summary><span class="note-index">03</span><div><div class="note-category">SPATIOTEMPORAL DATA / DYNAMIC GRAPHS</div><h3 data-i18n="note3Title">What if the connections change with time?</h3></div><span class="note-expand" aria-hidden="true">+</span></summary><div class="note-body"><p data-i18n="note3Body">Some systems change not only in their node signals, but also in the relationships between nodes. I’m interested in models that distinguish a change in the signal from a change in the structure carrying it.</p><div class="note-question" data-i18n="note3Question">How do we learn from a system whose wiring is itself part of the story?</div></div></details>
+  </div>
+  <p class="section-note" data-i18n="notebookNote">A few starting questions for future notes. Click a question to open it.</p>
+ </section>
+ <section class="wrap contact-section" id="contact" aria-labelledby="contact-title">
+  <div class="section-label reveal"><span class="section-number">05 /</span><span data-i18n="contactLabel">Let’s connect</span></div>
+  <div class="contact-grid reveal"><h2 id="contact-title"><span data-i18n="contactTitle1">Good ideas begin</span><br><span data-i18n="contactTitle2">with a </span><em data-i18n="contactTitle3">hello.</em></h2><div class="contact-details"><p class="contact-description" data-i18n="contactDescription">Interested in graph learning, time series, or a question that sits somewhere in between? I’d be happy to exchange ideas and talk about research.</p><div class="email-row"><a class="email-link" href="mailto:yw4788@columbia.edu"><span>yw4788@columbia.edu</span><span class="arrow" aria-hidden="true">↗</span></a><button class="copy-email" id="copy-email" aria-label="Copy email address"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M15 8V4H4v11h4"/></svg></button></div><div class="contact-other"><a href="https://github.com/caracallium" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 19c-4 1-4-2-5-2m10 5v-4c0-1 .3-2 1-2-4 0-7-1-7-5 0-1 .5-2 1-3-1-2 0-3 0-3 2 0 3 1 3 1a10 10 0 0 1 6 0s1-1 3-1c0 0 1 1 0 3 .5 1 1 2 1 3 0 4-3 5-7 5 1 .5 1 1.5 1 2v4" transform="translate(-1 -1)"/></svg>GitHub <span aria-hidden="true">↗</span></a><a href="#work"><span data-i18n="publication">Publications</span> <span aria-hidden="true">↗</span></a></div></div></div>
+  <footer><div class="footer-meta"><span>© <span id="footer-year">2026</span> Yihan Wu · Caracalla</span><span class="footer-built" data-i18n="footerBuilt">STATISTICS × GRAPHS × TIME.</span><a href="#top"><span data-i18n="backTop">BACK TO TOP</span><span aria-hidden="true">↑</span></a></div><div class="footer-word" aria-hidden="true">caracalla<span class="footer-dot">.</span></div></footer>
+ </section>
+</main>
+<dialog id="citation-dialog" class="citation-dialog" aria-labelledby="citation-title"><div class="dialog-inner"><div class="dialog-header"><h2 id="citation-title" data-i18n="citeTitle">Cite this work</h2><button class="dialog-close" id="close-citation" aria-label="Close citation dialog">×</button></div><p class="citation-work-title" id="citation-work-title">Structure-Aware Abstraction of Hierarchical Time Series</p><pre id="bibtex-text" tabindex="0">@inproceedings{wu2026structureaware,
+  title = {Structure-Aware Abstraction of Hierarchical Time Series},
+  author = {Wu, Yihan and Zhu, Xuliang and Li, Guozhong and Wang, Kai and Lin, Xuemin},
+  booktitle = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
+  pages = {5500--5511},
+  year = {2026},
+  doi = {10.1145/3770855.3817713}
+}</pre><div class="dialog-actions"><span class="dialog-hint" data-i18n="citeHint">Paper citation · KDD 2026</span><button class="button button-primary" id="copy-bibtex"><span data-i18n="copyCitation">Copy BibTeX</span><span aria-hidden="true">↗</span></button></div></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<noscript><p class="wrap" style="padding-bottom:25px">The full profile is available without JavaScript. Interactive graphics, language switching, and the citation dialog require JavaScript. The paper’s DOI is listed above.</p></noscript>
+<script>
+/* CARACALLA — all interactions are local. No analytics, cookies, CDN, or API calls. */
+(() => {
+  'use strict';
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const root = document.documentElement;
+  const storage = {
+    get(key) { try { return localStorage.getItem(key); } catch (_) { return null; } },
+    set(key, value) { try { localStorage.setItem(key, value); } catch (_) { /* File URLs/private mode may deny storage. */ } }
+  };
+  // Copy and contact details can be edited directly in index.html. Change this too if the email changes.
+  const EMAIL = 'yw4788@columbia.edu';
+  const zh = {
+    workIntro:"已发表论文、已接收文章，以及正在审稿的研究。",
+    filterAll:"全部",
+    filterPublished:"已发表 / 已接收",
+    filterReview:"审稿中",
+    publishedHeading:"同行评审论文与已接收文章",
+    reviewHeading:"在审稿件",
+    reviewDescription:"以下工作仍在审稿，尚未接收。投稿期刊或会议不代表已发表或已录用。",
+    statusPublished:"已发表",
+    statusAccepted:"已接收 / 待刊",
+    statusReview:"审稿中",
+    equalContribution:"*共同第一作者。",
+    publisherLink:"出版页面 / DOI",
+    soleAuthor:"独立作者",
+    reviewVenue:"在审稿件",
+    reviewKDD:"已投稿 KDD 2027",
+    reviewTMLR:"已投稿 Transactions on Machine Learning Research（TMLR）",
+    manuscript2026:"2026 年稿件",
+    manuscriptNoLink:"审稿中 · 暂未提供公开链接",
+
+    skip:'跳至正文',navResearch:'论文',navAbout:'关于',navNotebook:'笔记',navContact:'联系',
+    status:'关于研究，也关于好奇心的个人空间',newYork:'纽约',
+    heroEyebrow:'统计学 / 图学习 / 时间序列',
+    heroLine1:'在结构中寻找规律，',heroLine2:'在时间中理解变化。',
+    heroBio1:'我是',columbia:'哥伦比亚大学',heroBio2:'统计学硕士生，关注图结构与时间动态如何帮助我们理解复杂数据，研究兴趣包括图学习、时间序列与时空建模。',
+    exploreResearch:'了解我的研究',getInTouch:'与我联系',
+    figureTitle:'连接的形状',viewGraph:'图结构',viewTree:'层次树',viewSignal:'时序',
+    syntheticSignal:'模拟信号 x(t)',pause:'暂停',
+    figureCaption:'规律，在连接中浮现。',figureDisclaimer:'交互示意 · 模拟数据',figureHint:'移动鼠标旋转，点击节点查看对应信号。',
+    summaryNow:'目前',summaryNowText:'哥伦比亚大学 · 统计学硕士',summaryNowSub:'美国 · 纽约',
+    summaryWork:'代表工作',summaryWorkText:'层级时间序列 · KDD ’26',summaryWorkSub:'结构感知的时间序列抽象',
+    summaryNext:'继续探索',summaryNextText:'图结构与时间序列智能',summaryNextSub:'学习、理解，保持好奇',
+    researchLabel:'研究与论文',researchTitle1:'从局部结构，',researchTitle2:'看见更大图景。',researchTag:'2024 — 2026',
+    treeCaption:'保留结构。<br>留住信号。',paperTrack:'研究赛道',paperAuthor:'共同第一作者',
+    paperAbstract:'如何概括时间序列，同时保留连接它们的层级结构？这项工作研究结构感知的时间序列抽象，通过选择代表性子图，兼顾时间相似性与节点价值。开源代码包含 V-Greedy、P-Greedy 和 OSS 三种方法。',
+    readPaper:'阅读论文',code:'代码',artifact:'归档',treeDisclaimer:'图为概念示意，并非论文实验结果。',
+    interestsLabel:'研究兴趣',interestsTitle1:'顺着连接，',interestsTitle2:'继续探索。',
+    interest1Title:'图学习',interest1Text:'从关系结构中学习，关注图神经网络、有意义的图表示，以及如何理解模型究竟学到了什么。',
+    interest2Title:'时间序列智能',interest2Text:'寻找时间数据中有用的抽象，尤其关注那些并非孤立存在、而是通过层级或图结构彼此关联的信号。',
+    interest3Title:'时空建模',interest3Text:'探索关系与信号如何共同演化，以及统计学习如何把局部相互作用与更大系统的行为联系起来。',
+    interestsNote:'这里列出的是我希望深入探索的研究方向，并非已完成项目清单。',
+    aboutLabel:'关于我',aboutTitle1:'始终保持',aboutTitle2:'求知的姿态。',
+    aboutIntro:'从上海到纽约，我在统计学与人工智能的交汇处探索自己的研究道路。我喜欢那些将简洁的数学思想与复杂现实结构联系起来的问题。',
+    aboutAside:'不同的城市，一样的好奇心。',present:'至今',educationNY:'美国 · 纽约',
+    columbiaDegree:'统计学文学硕士（在读）',columbiaDetail:'在统计学的研究生学习中，继续探索图学习与时间数据相关的研究问题。',
+    undergraduateTime:'本科阶段',sjtu:'上海交通大学',educationSH:'中国 · 上海',sjtuDegree:'本科学习',
+    sjtuDetail:'科研旅程的起点，开展了与层级时间序列抽象及图结构数据相关的研究。',
+    offScreen:'研究之外',history:'历史',museums:'博物馆',cities:'城市探索',
+    notebookLabel:'开放笔记',notebookTitle1:'值得反复想的',notebookTitle2:'几个问题。',
+    note1Title:'一个好的图解释，应该保留什么？',
+    note1Body:'有用的解释，不应只是圈出几个重要节点。我更关心的是：它是否保留了预测背后的关系？当图发生变化时，这个解释是否依然成立？',
+    note1Question:'一个解释，能否同时做到简洁，又忠实于结构？',
+    note2Title:'什么时候，更小的摘要反而更有价值？',
+    note2Body:'压缩本身不是目的。关键在于，哪些时间模式与关系对后续决策真正重要。层级结构为数据提供了语境，也使“怎样选择代表性摘要”这个问题更加有趣。',
+    note2Question:'哪些内容可以删去，而不丢掉数据真正重要的原因？',
+    note3Title:'如果连接本身也随时间改变呢？',
+    note3Body:'有些系统不只节点信号在变化，节点之间的关系也在演化。我希望探索能够区分“信号发生改变”与“承载信号的结构发生改变”的模型。',
+    note3Question:'当系统的连接方式本身就是问题的一部分，我们该如何学习？',
+    notebookNote:'一些留给未来笔记的起始问题。点击标题展开。',
+    contactLabel:'与我联系',contactTitle1:'一个好想法，',contactTitle2:'从一句',contactTitle3:'你好开始。',
+    contactDescription:'对图学习、时间序列，或两者之间的某个问题感兴趣？欢迎交流想法，聊聊研究。',
+    publication:'全部论文',footerBuilt:'统计学 × 图结构 × 时间',backTop:'回到顶部',
+    citeTitle:'引用这项工作',citeHint:'论文引用 · KDD 2026',copyCitation:'复制 BibTeX'
+  };
+  const originalEnglish = {};
+  $$('[data-i18n]').forEach(el => { originalEnglish[el.dataset.i18n] = el.innerHTML; });
+  let lang = storage.get('caracalla-language') === 'zh' ? 'zh' : 'en';
+  let graphController = null;
+  function setLanguage(next) {
+    lang = next === 'zh' ? 'zh' : 'en';
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    const texts = lang === 'zh' ? zh : originalEnglish;
+    $$('[data-i18n]').forEach(el => {
+      // These are trusted, hand-authored static strings, not user input or fetched content.
+      if (texts[el.dataset.i18n] !== undefined) el.innerHTML = texts[el.dataset.i18n];
+    });
+    $('#language-toggle').setAttribute('aria-label', lang === 'en' ? 'Switch to Chinese' : 'Switch to English');
+    $('#en-label').style.opacity = lang === 'en' ? '1' : '.45';
+    $('#zh-label').style.opacity = lang === 'zh' ? '1' : '.45';
+    $('#next-node').setAttribute('aria-label', lang === 'zh' ? '选择下一个节点' : 'Select next node');
+    $('#copy-email').setAttribute('aria-label', lang === 'zh' ? '复制邮箱地址' : 'Copy email address');
+    $('#close-citation').setAttribute('aria-label', lang === 'zh' ? '关闭引用窗口' : 'Close citation dialog');
+    $('.figure-tabs').setAttribute('aria-label', lang === 'zh' ? '可视化模式' : 'Visualization mode');
+    $('#graph-canvas').setAttribute('aria-label', lang === 'zh' ? '交互示意：图结构、层次树和模拟时间序列。可用模式按钮切换视图，用下一节点按钮切换选中的节点。' : 'Interactive illustration of a graph, a hierarchy, and synthetic time-series signals. Use the view buttons to change visualization and Next node to change selection.');
+    document.title = lang === 'zh' ? 'Caracalla — 吴屹瀚 | 图学习、时间序列与统计学' : 'Caracalla — Yihan Wu | Graphs, Time Series & Statistics';
+    updateThemeLabel(); updateMenuLabel(); updateWorkFilterLabel(); updateCitationLabels();
+    if (graphController) graphController.labels();
+    storage.set('caracalla-language', lang);
+  }
+  $('#language-toggle').addEventListener('click', () => setLanguage(lang === 'en' ? 'zh' : 'en'));
+  function updateThemeLabel() {
+    const dark = root.dataset.theme === 'dark';
+    $('#theme-toggle').setAttribute('aria-pressed', String(dark));
+    $('#theme-toggle').setAttribute('aria-label', lang === 'zh' ? (dark ? '切换为浅色模式' : '切换为深色模式') : (dark ? 'Switch to light theme' : 'Switch to dark theme'));
+  }
+  function setTheme(theme) {
+    root.dataset.theme = theme === 'dark' ? 'dark' : 'light';
+    $('meta[name="theme-color"]').content = theme === 'dark' ? '#17251f' : '#f6f5ef';
+    storage.set('caracalla-theme', root.dataset.theme);
+    updateThemeLabel();
+    if (graphController) graphController.colors();
+  }
+  // Deliberately default to the designed light palette; a visitor's explicit choice is remembered.
+  setTheme(storage.get('caracalla-theme') || 'light');
+  $('#theme-toggle').addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+  const mobileToggle = $('#mobile-toggle');
+  const nav = $('#navigation');
+  function updateMenuLabel() {
+    const open = mobileToggle.getAttribute('aria-expanded') === 'true';
+    mobileToggle.setAttribute('aria-label', lang === 'zh' ? (open ? '关闭菜单' : '打开菜单') : (open ? 'Close menu' : 'Open menu'));
+  }
+  function setMenu(open) { nav.classList.toggle('open', open); mobileToggle.setAttribute('aria-expanded', String(open)); updateMenuLabel(); }
+  mobileToggle.addEventListener('click', () => setMenu(mobileToggle.getAttribute('aria-expanded') !== 'true'));
+  $$('#navigation a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('click', e => { if (!e.target.closest('.site-header')) setMenu(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 620) setMenu(false); }, {passive:true});
+  function updateClock() {
+    try {
+      const now = new Date();
+      $('#ny-clock').textContent = new Intl.DateTimeFormat('en-GB', { timeZone:'America/New_York', hour:'2-digit', minute:'2-digit', hour12:false }).format(now);
+      $('#ny-clock').dateTime = now.toISOString();
+      $('#footer-year').textContent = String(now.getFullYear());
+    } catch (_) { $('#ny-clock').textContent = 'NYC'; }
+  }
+  updateClock(); setInterval(updateClock, 60000);
+  let toastTimeout;
+  function toast(message) {
+    const el = $('#toast'); el.textContent = message; el.classList.add('visible');
+    clearTimeout(toastTimeout); toastTimeout = setTimeout(() => el.classList.remove('visible'), 3500);
+  }
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      try { await navigator.clipboard.writeText(text); return true; } catch (_) { /* Fall through to offline support. */ }
+    }
+    const area = document.createElement('textarea');
+    area.value = text; area.readOnly = true;
+    area.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
+    // A modal dialog makes the rest of the page inert, so copy inside it when open.
+    const host = $('#citation-dialog').open ? $('#citation-dialog') : document.body;
+    const previousFocus = document.activeElement;
+    host.appendChild(area); area.focus(); area.select();
+    let copied = false;
+    try { copied = document.execCommand('copy'); } catch (_) { copied = false; }
+    area.remove();
+    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus({preventScroll:true});
+    return copied;
+  }
+  $('#copy-email').addEventListener('click', async () => {
+    const ok = await copyText(EMAIL);
+    toast(lang === 'zh' ? (ok ? '邮箱地址已复制' : '无法自动复制，请选择页面上的邮箱地址复制。') : (ok ? 'Email address copied' : 'Please select and copy the email address on the page.'));
+  });
+  // Bibliographic metadata copied from the supplied CV. In-review entries are @unpublished.
+  const citations = {
+  "htsa": {
+    "title": "Structure-Aware Abstraction of Hierarchical Time Series",
+    "bibtex": "@inproceedings{wu2026structureaware,\n  title = {Structure-Aware Abstraction of Hierarchical Time Series},\n  author = {Wu, Yihan and Zhu, Xuliang and Li, Guozhong and Wang, Kai and Lin, Xuemin},\n  booktitle = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining},\n  pages = {5500--5511},\n  year = {2026},\n  doi = {10.1145/3770855.3817713}\n}",
+    "en": "KDD 2026 · Published · Equal contribution: Yihan Wu and Xuliang Zhu",
+    "zh": "KDD 2026 · 已发表 · 吴屹瀚与 Xuliang Zhu 为共同第一作者"
+  },
+  "sii-siri": {
+    "title": "Baseline SII and SIRI Identify Immune-Inflammatory Susceptibility and Improve Risk Stratification of Early Subclinical Cardiac Dysfunction during Non-Steroidal Aromatase Inhibitor Therapy",
+    "bibtex": "@article{li2026baselinesii,\n  title = {Baseline SII and SIRI Identify Immune-Inflammatory Susceptibility and Improve Risk Stratification of Early Subclinical Cardiac Dysfunction during Non-Steroidal Aromatase Inhibitor Therapy},\n  author = {Li, Cenyu and Tao, Zhengyu and Wu, Yihan and Wu, Chen and Wang, Zi and Wang, Xiaoning and Dai, Huijuan and Jiang, Meng and Pu, Jun},\n  journal = {Frontiers in Cardiovascular Medicine},\n  note = {Accepted / in press},\n  year = {2026},\n  doi = {10.3389/fcvm.2026.1888328}\n}",
+    "en": "Frontiers in Cardiovascular Medicine · 2026 · Accepted / in press",
+    "zh": "Frontiers in Cardiovascular Medicine · 2026 · 已接收 / 待刊"
+  },
+  "portfolios": {
+    "title": "Portfolios, Stock Market Indices and Investment Strategies",
+    "bibtex": "@article{wu2025portfolios,\n  title = {Portfolios, Stock Market Indices and Investment Strategies},\n  author = {Wu, Yihan},\n  journal = {Open Journal of Business and Management},\n  volume = {13},\n  number = {3},\n  pages = {2099--2119},\n  year = {2025},\n  doi = {10.4236/ojbm.2025.133109}\n}",
+    "en": "Open Journal of Business and Management · 13(3): 2099–2119 · 2025",
+    "zh": "Open Journal of Business and Management · 13(3): 2099–2119 · 2025"
+  },
+  "lambda": {
+    "title": "Lambda: Learning Matchable Prior for Entity Alignment with Unlabeled Dangling Cases",
+    "bibtex": "@inproceedings{yin2024lambda,\n  title = {Lambda: Learning Matchable Prior for Entity Alignment with Unlabeled Dangling Cases},\n  author = {Yin, Hang and Xiang, Liyao and Ding, Dong and He, Yuheng and Wu, Yihan and Chu, Pengzhi and Wang, Xinbing and Zhou, Chenghu},\n  booktitle = {Advances in Neural Information Processing Systems},\n  volume = {37},\n  pages = {78964--78995},\n  year = {2024},\n  doi = {10.52202/079017-2507}\n}",
+    "en": "NeurIPS 2024 · Volume 37 · pp. 78964–78995",
+    "zh": "NeurIPS 2024 · 第 37 卷 · 第 78964–78995 页"
+  },
+  "btsplit": {
+    "title": "BTSplit: Boundary-Tracking Split for Constraint-Aware Maximum Common Induced Subgraph",
+    "bibtex": "@unpublished{wu2026btsplit,\n  title = {BTSplit: Boundary-Tracking Split for Constraint-Aware Maximum Common Induced Subgraph},\n  author = {Wu, Yihan and Xing, Zitao and Qian, Yixiang and Zhu, Xuliang and Wang, Kai and Lin, Xuemin},\n  note = {Manuscript under review},\n  year = {2026}\n}",
+    "en": "2026 manuscript · Under review · Not an accepted publication",
+    "zh": "2026 年稿件 · 审稿中 · 非已接收论文"
+  },
+  "tsfms": {
+    "title": "From Forecasting to Classification: Selective Knowledge Transfer with TSFMs",
+    "bibtex": "@unpublished{li2026forecastingclassification,\n  title = {From Forecasting to Classification: Selective Knowledge Transfer with TSFMs},\n  author = {Li, Guozhong and Wu, Yihan and Zuo, Rundong and Zhu, Xuliang},\n  note = {Manuscript under review at KDD 2027},\n  year = {2026}\n}",
+    "en": "2026 manuscript · Under review at KDD 2027 · Not an accepted publication",
+    "zh": "2026 年稿件 · 投稿 KDD 2027，审稿中 · 非已接收论文"
+  },
+  "entry-point": {
+    "title": "Where a New Concept Must Enter: Entry Point Gates Cross-Task Usability in Unified Multimodal Models",
+    "bibtex": "@unpublished{qiu2026entrypoint,\n  title = {Where a New Concept Must Enter: Entry Point Gates Cross-Task Usability in Unified Multimodal Models},\n  author = {Qiu, Zongyang and Wu, Yihan and Fan, Kaixuan and Li, Bo and Xiong, Hui},\n  note = {Manuscript under review at Transactions on Machine Learning Research (TMLR)},\n  year = {2026}\n}",
+    "en": "2026 manuscript · Under review at TMLR · Not an accepted publication",
+    "zh": "2026 年稿件 · 投稿 TMLR，审稿中 · 非已接收论文"
+  }
+};
+  const dialog = $('#citation-dialog');
+  let activeCitation = 'htsa';
+  function updateCitationLabels() {
+    const citation = citations[activeCitation];
+    if (!citation) return;
+    $('#citation-work-title').textContent = citation.title;
+    $('#bibtex-text').textContent = citation.bibtex;
+    $('.dialog-hint').textContent = citation[lang];
+  }
+  $$('[data-citation]').forEach(button => button.addEventListener('click', () => {
+    if (!citations[button.dataset.citation]) return;
+    activeCitation = button.dataset.citation;
+    updateCitationLabels();
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else { dialog.setAttribute('open', ''); dialog.scrollIntoView({block:'center'}); }
+  }));
+  let workFilter = 'all';
+  function updateWorkFilterLabel() {
+    const count = workFilter === 'all' ? 7 : workFilter === 'published' ? 4 : 3;
+    $('#work-filter-status').textContent = lang === 'zh' ? `显示 ${count} 项研究工作` : `${count} works shown`;
+    $('.work-filters').setAttribute('aria-label', lang === 'zh' ? '筛选研究论文' : 'Filter research works');
+  }
+  $$('.work-filters').forEach(el => { el.hidden = false; });
+  $$('[data-work-filter]').forEach(button => button.addEventListener('click', () => {
+    const value = button.dataset.workFilter;
+    if (!['all','published','under-review'].includes(value)) return;
+    workFilter = value;
+    $$('[data-work-filter]').forEach(el => el.setAttribute('aria-pressed', String(el.dataset.workFilter === value)));
+    $$('[data-work-group]').forEach(el => { el.hidden = value !== 'all' && el.dataset.workGroup !== value; });
+    updateWorkFilterLabel();
+  }));
+  $('#close-citation').addEventListener('click', () => {
+    if (typeof dialog.close === 'function') dialog.close(); else dialog.removeAttribute('open');
+  });
+  dialog.addEventListener('click', e => {
+    const r = dialog.getBoundingClientRect();
+    if (e.target === dialog && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) dialog.close();
+  });
+  $('#copy-bibtex').addEventListener('click', async () => {
+    const ok = await copyText($('#bibtex-text').textContent.trim());
+    // A regular page toast is behind the native dialog top layer. Use the hint as an accessible response too.
+    const message = lang === 'zh' ? (ok ? 'BibTeX 已复制' : '请选择上方文字并手动复制。') : (ok ? 'BibTeX copied' : 'Please select the citation above and copy it manually.');
+    $('.dialog-hint').textContent = message; $('.dialog-hint').setAttribute('role', 'status');
+  });
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+    }), {threshold:.06, rootMargin:'0px 0px 20px 0px'});
+    $$('.reveal').forEach(el => revealObserver.observe(el));
+    root.classList.add('js-ready');
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) $$('#navigation a').forEach(a => {
+          const active = a.getAttribute('href') === '#' + entry.target.id;
+          a.classList.toggle('active', active);
+          if (active) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current');
+        });
+      });
+    }, {rootMargin:'-12% 0px -63% 0px', threshold:0});
+    ['work','about','notebook','contact'].forEach(id => sectionObserver.observe(document.getElementById(id)));
+  }
+  setLanguage(lang);
+
+  // ── Graph lab ──────────────────────────────────────────────────────────────
+  // All node positions and signals below are synthetic. This visual is not HTSA
+  // code, a trained GNN, a model explanation, or an experiment from the paper.
+  const canvas = $('#graph-canvas');
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return; // The static page and all other controls still work.
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let running = !motionQuery.matches, manualMotionChoice = false;
+  let visible = true, view = 'graph', selected = 6, phase = 0;
+  let width = 0, height = 0, raf = 0, lastTime = 0;
+  let pointerX = 0, pointerY = 0, rotationX = 0, rotationY = 0;
+  let colors = {}, projected = [];
+  const n = 92;
+  const nodes = Array.from({length:n}, (_,i) => {
+    const y = 1 - 2 * (i + .5) / n;
+    const r = Math.sqrt(1 - y*y), angle = i * Math.PI * (3 - Math.sqrt(5));
+    return {x:Math.cos(angle)*r, y, z:Math.sin(angle)*r, id:i};
+  });
+  const edges = [], edgeSet = new Set();
+  nodes.forEach((a, i) => {
+    nodes.map((b,j) => ({j, d:(a.x-b.x)**2+(a.y-b.y)**2+(a.z-b.z)**2}))
+      .filter(x => x.j !== i).sort((a,b) => a.d-b.d).slice(0,5).forEach(({j}) => {
+        const key = Math.min(i,j)+':'+Math.max(i,j);
+        if (!edgeSet.has(key)) { edgeSet.add(key); edges.push([i,j]); }
+      });
+  });
+  const treeNodes = [];
+  for (let level=0; level<5; level++) for (let j=0; j<2**level; j++) {
+    treeNodes.push({id:treeNodes.length, level, slot:j, count:2**level});
+  }
+  function refreshColors() {
+    const css = getComputedStyle(root);
+    colors = {ink:css.getPropertyValue('--ink').trim(),muted:css.getPropertyValue('--muted').trim(),line:css.getPropertyValue('--line').trim(),green:css.getPropertyValue('--green').trim(),accent:css.getPropertyValue('--accent').trim(),paper:css.getPropertyValue('--paper').trim()};
+    requestDraw();
+  }
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    width = rect.width; height = rect.height;
+    const dpr = Math.min(window.devicePixelRatio || 1,2);
+    const pw = Math.round(width*dpr), ph = Math.round(height*dpr);
+    if (canvas.width !== pw || canvas.height !== ph) {
+      canvas.width = pw; canvas.height = ph;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      paint(); // Draw synchronously so a resize or screenshot never leaves a blank canvas.
+    }
+    requestDraw();
+  }
+  function line(x1,y1,x2,y2,color,alpha=1,lineWidth=1) {
+    ctx.globalAlpha=alpha; ctx.strokeStyle=color; ctx.lineWidth=lineWidth;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); ctx.globalAlpha=1;
+  }
+  function dot(x,y,r,color,alpha=1) {
+    ctx.globalAlpha=alpha; ctx.fillStyle=color; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+  }
+  function label(text,x,y,color=colors.muted,size=8,align='left') {
+    ctx.font=`${size}px ui-monospace, Consolas, monospace`;ctx.fillStyle=color;ctx.globalAlpha=1;ctx.textAlign=align;ctx.fillText(text,x,y);
+  }
+  function signal(t,id) {
+    return .56*Math.sin(t*1.7+id*.29)+.24*Math.sin(t*4.2+id*.8)+.13*Math.cos(t*7.8+id*.13);
+  }
+  function selectedHalo(p, text=true) {
+    ctx.strokeStyle=colors.green;ctx.globalAlpha=.6;ctx.lineWidth=1;
+    ctx.beginPath();ctx.arc(p.x,p.y,8,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
+    dot(p.x,p.y,4,colors.green);dot(p.x,p.y,1.5,colors.paper);
+    if (text) label('v'+String(selected+1).padStart(2,'0'), Math.min(p.x+13,width-37), Math.max(p.y-11,77),colors.green,9);
+  }
+  function drawGraph() {
+    const cx=width*.53, cy=height*.465, radius=Math.min(width*.354,height*.318);
+    const angle=phase*.075+rotationX+.2, tilt=rotationY-.1;
+    const cos=Math.cos(angle),sin=Math.sin(angle),ct=Math.cos(tilt),st=Math.sin(tilt);
+    projected=nodes.map(p => {
+      const x=p.x*cos+p.z*sin,z=-p.x*sin+p.z*cos;
+      const y=p.y*ct-z*st,zz=p.y*st+z*ct;
+      const perspective=1+zz*.09;
+      return {x:cx+x*radius*perspective,y:cy+y*radius*perspective,z:zz,id:p.id};
+    });
+    ctx.strokeStyle=colors.green;ctx.globalAlpha=.15;ctx.lineWidth=.7;ctx.setLineDash([2,6]);
+    ctx.beginPath();ctx.ellipse(cx,cy,radius*1.09,radius*1.09,0,0,Math.PI*2);ctx.stroke();
+    ctx.beginPath();ctx.ellipse(cx,cy,radius*1.2,radius*.48,-.65,0,Math.PI*2);ctx.stroke();
+    ctx.setLineDash([]);ctx.globalAlpha=1;
+    line(cx-radius*1.16,cy,cx+radius*1.16,cy,colors.line,.7,.6);
+    line(cx,cy-radius*1.16,cx,cy+radius*1.16,colors.line,.7,.6);
+    edges.forEach(([a,b]) => {
+      const p=projected[a],q=projected[b],active=a===selected||b===selected;
+      const depth=(p.z+q.z+2)/4;
+      line(p.x,p.y,q.x,q.y,colors.green,active?.87:.10+depth*.26,active?1.25:.65);
+      if(active&&running){const f=(phase*.25+a*.12)%1;dot(p.x+(q.x-p.x)*f,p.y+(q.y-p.y)*f,1.8,colors.green,.8);}
+    });
+    [...projected].sort((a,b)=>a.z-b.z).forEach(p=>{
+      const near=edges.some(([a,b])=>(a===selected&&b===p.id)||(b===selected&&a===p.id));
+      dot(p.x,p.y,near?3:1.6+(p.z+1)*.55,colors.green,.28+(p.z+1)*.31);
+    });
+    selectedHalo(projected[selected%nodes.length]);
+    label('V / '+nodes.length,cx+radius*.96,cy-radius*.83,colors.muted,8,'right');
+    label('E / '+edges.length,cx+radius*.96,cy-radius*.83+13,colors.muted,8,'right');
+    label('x',cx+radius*1.17,cy+12,colors.muted,8);
+    label('t',cx+7,cy-radius*1.17,colors.muted,8);
+  }
+  function drawTree() {
+    const x0=width*.06,x1=width*.96,y0=height*.22,y1=height*.75;
+    projected=treeNodes.map(p=>({x:x0+(p.slot+.5)/p.count*(x1-x0),y:y0+p.level*(y1-y0)/4,z:0,id:p.id}));
+    const sel=selected%treeNodes.length;
+    const ancestors=new Set([sel]);let k=sel;
+    while(k>0){k=Math.floor((k-1)/2);ancestors.add(k);}
+    projected.forEach((p,i)=>{
+      if(i===0)return;const par=projected[Math.floor((i-1)/2)],active=ancestors.has(i);
+      ctx.strokeStyle=colors.green;ctx.globalAlpha=active?.9:.26;ctx.lineWidth=active?1.5:1;
+      ctx.beginPath();ctx.moveTo(par.x,par.y);const mid=(par.y+p.y)/2;ctx.bezierCurveTo(par.x,mid,p.x,mid,p.x,p.y);ctx.stroke();ctx.globalAlpha=1;
+    });
+    projected.forEach((p,i)=>{
+      dot(p.x,p.y,treeNodes[i].level===4?3:4,colors.paper);
+      ctx.lineWidth=1;ctx.strokeStyle=colors.green;ctx.globalAlpha=ancestors.has(i)?1:.55;
+      ctx.beginPath();ctx.arc(p.x,p.y,treeNodes[i].level===4?3:4,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
+      if(ancestors.has(i))dot(p.x,p.y,2,colors.green);
+    });
+    selectedHalo(projected[sel]);
+    label('ROOT → LEAF',width-8,82,colors.muted,8,'right');
+  }
+  function drawSignals() {
+    projected=[];
+    const x0=width*.12,x1=width*.96,top=height*.24,bottom=height*.72;
+    for(let row=0;row<4;row++){
+      const y=top+(bottom-top)*row/3, id=(selected+row*9)%nodes.length;
+      const amp=Math.min(18,height*.042);
+      line(x0,y,x1,y,colors.line,.8,.7);
+      label('x'+String(id+1).padStart(2,'0'),x0-8,y+3,colors.muted,8,'right');
+      ctx.strokeStyle=colors.green;ctx.lineWidth=row===0?1.8:1;ctx.globalAlpha=row===0?1:.3+row*.1;
+      ctx.beginPath();
+      for(let x=x0;x<=x1;x+=2){const yv=y+signal((x-x0)*.023-phase,id)*amp;if(x===x0)ctx.moveTo(x,yv);else ctx.lineTo(x,yv);}
+      ctx.stroke();ctx.globalAlpha=1;
+    }
+    const marker=x0+(x1-x0)*.71;
+    ctx.setLineDash([3,4]);line(marker,top-25,marker,bottom+25,colors.green,.35,.8);ctx.setLineDash([]);
+    label('t',x1,bottom+32,colors.muted,9,'right');
+    label('SYNTHETIC SIGNALS',x1,82,colors.muted,8,'right');
+  }
+  function drawSignalStrip() {
+    const y=height-63,x0=width*.17,x1=width*.99;
+    line(x0,y,x1,y,colors.line,.8,.6);
+    label('x(t)',x0-10,y+3,colors.green,9,'right');
+    ctx.lineWidth=1.1;ctx.strokeStyle=colors.green;ctx.globalAlpha=.8;
+    ctx.beginPath();
+    for(let x=x0;x<=x1;x+=2){const p=y+signal((x-x0)*.032-phase,selected)*11;if(x===x0)ctx.moveTo(x,p);else ctx.lineTo(x,p);}
+    ctx.stroke();ctx.globalAlpha=1;
+    const marker=x0+(x1-x0)*.77;dot(marker,y+signal((marker-x0)*.032-phase,selected)*11,2.5,colors.green);
+  }
+  function paint() {
+    if (!width || !height || !colors.green) return;
+    ctx.clearRect(0,0,width,height);
+    if(view==='graph')drawGraph();else if(view==='tree')drawTree();else drawSignals();
+    drawSignalStrip();
+  }
+  function draw(timestamp=performance.now()) {
+    raf=0;
+    if(!visible||document.hidden||!width||!height)return;
+    if(running&&lastTime&&timestamp-lastTime<30){raf=requestAnimationFrame(draw);return;}
+    const dt=Math.min(.07,lastTime?(timestamp-lastTime)/1000:0);lastTime=timestamp;
+    if(running)phase+=dt;
+    rotationX+=(pointerX*.24-rotationX)*.055;rotationY+=(pointerY*.16-rotationY)*.055;
+    paint();
+    if(running)raf=requestAnimationFrame(draw);
+  }
+  function requestDraw(){if(!raf&&visible&&!document.hidden)raf=requestAnimationFrame(draw);}
+  function labels() {
+    $('#pause-label').textContent=lang==='zh'?(running?'暂停':'播放'):(running?'Pause':'Play');
+    $('#pause-icon').textContent=running?'Ⅱ':'▷';
+    $('#pause-toggle').setAttribute('aria-pressed',String(!running));
+    $('#pause-toggle').setAttribute('aria-label',lang==='zh'?(running?'暂停动画':'播放动画'):(running?'Pause animation':'Play animation'));
+    $('#node-label').textContent=(lang==='zh'?'节点 ':'NODE ')+String(selected+1).padStart(2,'0');
+  }
+  $('#pause-toggle').addEventListener('click',()=>{running=!running;manualMotionChoice=true;lastTime=0;labels();requestDraw();});
+  $$('.figure-tabs button').forEach(btn=>btn.addEventListener('click',()=>{
+    view=btn.dataset.view;selected=selected%(view==='tree'?treeNodes.length:nodes.length);
+    $$('.figure-tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+    labels();requestDraw();
+  }));
+  $('#next-node').addEventListener('click',()=>{selected=(selected+1)%(view==='tree'?treeNodes.length:nodes.length);labels();requestDraw();});
+  canvas.addEventListener('pointermove',event=>{
+    if(event.pointerType==='touch')return;
+    const r=canvas.getBoundingClientRect();pointerX=(event.clientX-r.left)/r.width*2-1;pointerY=(event.clientY-r.top)/r.height*2-1;
+    if(!running)requestDraw();
+  },{passive:true});
+  canvas.addEventListener('pointerleave',()=>{pointerX=0;pointerY=0;if(!running)requestDraw();},{passive:true});
+  canvas.addEventListener('click',event=>{
+    if(!projected.length)return;
+    const r=canvas.getBoundingClientRect(),x=event.clientX-r.left,y=event.clientY-r.top;
+    let closest=null,distance=24;
+    projected.forEach(p=>{const d=Math.hypot(p.x-x,p.y-y);if(d<distance){distance=d;closest=p;}});
+    if(closest){selected=closest.id;labels();requestDraw();}
+  });
+  if('ResizeObserver' in window)new ResizeObserver(resize).observe(canvas);else window.addEventListener('resize',resize,{passive:true});
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{
+    visible=entries[0].isIntersecting;
+    if(!visible){cancelAnimationFrame(raf);raf=0;lastTime=0;}else requestDraw();
+  },{rootMargin:'60px'}).observe(canvas);
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){cancelAnimationFrame(raf);raf=0;lastTime=0;}else requestDraw();
+  });
+  const onMotionChange=event=>{if(!manualMotionChoice){running=!event.matches;labels();requestDraw();}};
+  if(motionQuery.addEventListener)motionQuery.addEventListener('change',onMotionChange);
+  graphController={labels,colors:refreshColors};
+  refreshColors();resize();labels();
+})();
+
+</script>
+</body>
+</html>
