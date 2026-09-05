@@ -61,6 +61,17 @@ html[lang=zh-CN] .hero-line{font-size:25px;line-height:1.5}html[lang=zh-CN] .sec
 .equal-contribution{font-size:10px;color:var(--muted);line-height:1.6;margin:-10px 0 18px}
 .work-status{display:inline-block;padding:3px 8px;font-size:9px;border:1px solid var(--line);font-family:var(--mono);letter-spacing:.3px;line-height:1.6;color:var(--green);white-space:nowrap}
 .featured-status{align-self:flex-start;background:var(--wash);margin-bottom:16px}
+.publication-feature{margin-top:31px}
+.publication-feature .paper-art{min-height:510px}
+.publication-feature .paper-content{padding:32px 38px 30px}
+.publication-feature h3{font-size:29px}
+.publication-feature .paper-abstract{max-width:none}
+.paper-art.has-generated-art{isolation:isolate}
+.paper-art-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2}
+.paper-art.has-generated-art:after{content:'';position:absolute;inset:0;background:rgba(20,48,35,.08);box-shadow:inset 0 0 70px rgba(8,25,18,.2);z-index:-1;pointer-events:none}
+.paper-art.has-generated-art .paper-art-top,.paper-art.has-generated-art .paper-art-footer{position:relative;z-index:1;text-shadow:0 1px 8px rgba(8,25,18,.55)}
+.paper-art-footer .big-symbol.compact-symbol{font-family:var(--mono);font-size:18px;letter-spacing:1px;align-self:flex-end}
+.publication-feature+.paper-footnote{margin-bottom:31px}
 .publications-list{border-top:1px solid var(--line);margin-top:25px}
 .publication-row{display:grid;grid-template-columns:80px minmax(0,1fr);gap:25px;padding:32px 0;border-bottom:1px solid var(--line)}
 .publication-index{display:flex;flex-direction:column;gap:15px;color:var(--muted);padding-top:4px}
@@ -77,8 +88,8 @@ html[lang=zh-CN] .hero-line{font-size:25px;line-height:1.5}html[lang=zh-CN] .sec
 .review-group .work-group-heading{margin-bottom:8px}.review-description{font-size:11px;color:var(--muted);max-width:860px;line-height:1.9;margin:0 0 15px}
 .review-group .publications-list{margin-top:18px}.status-under-review{color:var(--muted);border-style:dashed}
 .citation-work-title{font-family:var(--serif);font-size:19px;line-height:1.4;margin:8px 0 18px}
-@media(max-width:960px){.work-toolbar{align-items:flex-start;gap:14px}.publication-row{grid-template-columns:60px minmax(0,1fr);gap:20px}.publication-row h3{font-size:25px}.publication-meta{gap:9px}.work-group-heading h3{font-size:11px}}
-@media(max-width:620px){.work-toolbar{margin-bottom:25px;gap:14px;display:block}.work-intro{font-size:11px;margin-bottom:16px}.work-filters{width:100%;gap:3px;justify-content:space-between}.work-filters button{font-size:9px;padding:7px 9px;gap:6px;min-height:36px}.filter-count{font-size:8px}.work-group-heading h3{font-size:11px}.work-group-heading{gap:12px}.equal-contribution{font-size:9px}.publication-row{grid-template-columns:36px minmax(0,1fr);gap:13px;padding:25px 0}.publication-year{font-size:17px}.publication-index{gap:11px}.publication-index>.mono{font-size:8px}.publication-row h3{font-size:23px;line-height:1.28;letter-spacing:-.2px}.publication-venue{font-size:9px}.publication-meta{gap:7px;margin-bottom:12px}.work-status{font-size:8px}.publication-row .authors{font-size:10px}.publication-detail{font-size:9px}.publication-links{gap:16px}.work-link-note{font-size:9px;line-height:1.8}.review-group{margin-top:31px}.review-description{font-size:10px}.citation-work-title{font-size:18px}.publications-list{margin-top:20px}.featured-status{margin-bottom:13px}}
+@media(max-width:960px){.work-toolbar{align-items:flex-start;gap:14px}.publication-feature .paper-content{padding:27px}.publication-feature h3{font-size:26px}.publication-row{grid-template-columns:60px minmax(0,1fr);gap:20px}.publication-row h3{font-size:25px}.publication-meta{gap:9px}.work-group-heading h3{font-size:11px}}
+@media(max-width:620px){.work-toolbar{margin-bottom:25px;gap:14px;display:block}.work-intro{font-size:11px;margin-bottom:16px}.work-filters{width:100%;gap:3px;justify-content:space-between}.work-filters button{font-size:9px;padding:7px 9px;gap:6px;min-height:36px}.filter-count{font-size:8px}.work-group-heading h3{font-size:11px}.work-group-heading{gap:12px}.equal-contribution{font-size:9px}.publication-feature{margin-top:25px}.publication-feature .paper-art{height:315px;min-height:0}.publication-feature .paper-content{padding:24px 21px 22px}.publication-feature h3{font-size:26px}.paper-art-footer .big-symbol.compact-symbol{font-size:14px}.publication-feature+.paper-footnote{margin-bottom:25px}.publication-row{grid-template-columns:36px minmax(0,1fr);gap:13px;padding:25px 0}.publication-year{font-size:17px}.publication-index{gap:11px}.publication-index>.mono{font-size:8px}.publication-row h3{font-size:23px;line-height:1.28;letter-spacing:-.2px}.publication-venue{font-size:9px}.publication-meta{gap:7px;margin-bottom:12px}.work-status{font-size:8px}.publication-row .authors{font-size:10px}.publication-detail{font-size:9px}.publication-links{gap:16px}.work-link-note{font-size:9px;line-height:1.8}.review-group{margin-top:31px}.review-description{font-size:10px}.citation-work-title{font-size:18px}.publications-list{margin-top:20px}.featured-status{margin-bottom:13px}}
 @media(max-width:360px){.work-filters button{padding:7px 7px;gap:4px;font-size:8px}.publication-row h3{font-size:21px}}
 @media print{.work-filters,.publication-links{display:none!important}.publication-row{break-inside:avoid;grid-template-columns:50px minmax(0,1fr);padding:18px 0}.work-group[hidden]{display:block!important}.publication-row h3{font-size:17pt}.work-group-heading{break-after:avoid}.review-description{break-after:avoid}#work{break-inside:auto}.featured-status{color:black}.publication-venue{color:black}}
 
@@ -185,27 +196,43 @@ html[lang=zh-CN] .hero-line{font-size:25px;line-height:1.5}html[lang=zh-CN] .sec
   </article>
   <div class="paper-footnote"><span>KDD 2026 · pp. 5500–5511 · DOI: 10.1145/3770855.3817713</span><span data-i18n="treeDisclaimer">The diagram is a conceptual illustration, not an experimental result.</span></div>
 
+  <article class="paper publication-feature reveal" id="work-sii-siri" aria-labelledby="title-sii-siri">
+   <div class="paper-art has-generated-art" role="img" aria-label="Conceptual illustration of immune-inflammatory signals, cardiac monitoring, and tiered risk stratification; not an experimental result.">
+    <img class="paper-art-image" src="assets/sii-siri-concept.png" width="1254" height="1254" loading="lazy" decoding="async" alt="">
+    <div class="paper-art-top"><span>IMMUNE-INFLAMMATORY RISK</span><span class="paper-art-tag">02 · 2026</span></div>
+    <div class="paper-art-footer"><span data-i18n="clinicalCaption">FROM SIGNALS.<br>TO RISK STRATIFICATION.</span><span class="big-symbol compact-symbol" aria-hidden="true">SII · SIRI</span></div>
+   </div>
+   <div class="paper-content">
+    <span class="work-status featured-status" data-i18n="statusAccepted">Accepted / in press</span>
+    <div class="paper-kicker"><span>FRONTIERS IN CARDIOVASCULAR MEDICINE</span><span class="dot-separator">/</span><span>2026</span></div>
+    <h3 id="title-sii-siri">Baseline SII and SIRI Identify Immune-Inflammatory Susceptibility and Improve Risk Stratification of Early Subclinical Cardiac Dysfunction during Non-Steroidal Aromatase Inhibitor Therapy</h3>
+    <p class="authors">Cenyu Li, Zhengyu Tao, <strong>Yihan Wu</strong>, Chen Wu, Zi Wang, Xiaoning Wang, Huijuan Dai, Meng Jiang, Jun Pu</p>
+    <p class="paper-abstract" data-i18n="siiAbstract">This accepted study examines whether baseline systemic immune-inflammation measures can help identify susceptibility and improve risk stratification for early subclinical cardiac dysfunction during non-steroidal aromatase inhibitor therapy.</p>
+    <div class="tag-row"><span class="tag">Immune-inflammation</span><span class="tag">Cardiac dysfunction</span><span class="tag">Risk stratification</span></div>
+    <div class="paper-links"><a class="text-link paper-main-link" href="https://doi.org/10.3389/fcvm.2026.1888328" target="_blank" rel="noopener noreferrer"><span data-i18n="publisherLink">Publisher / DOI</span><span aria-hidden="true">↗</span></a><button class="cite-button" data-citation="sii-siri" aria-haspopup="dialog" aria-label="BibTeX: Baseline SII and SIRI Identify Immune-Inflammatory Susceptibility and Improve Risk Stratification of Early Subclinical Cardiac Dysfunction during Non-Steroidal Aromatase Inhibitor Therapy"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
+   </div>
+  </article>
+  <div class="paper-footnote"><span>Frontiers in Cardiovascular Medicine · 2026 · DOI: 10.3389/fcvm.2026.1888328</span><span data-i18n="conceptDisclaimer">The diagram is a conceptual illustration, not an experimental result.</span></div>
+
+  <article class="paper publication-feature reveal" id="work-portfolios" aria-labelledby="title-portfolios">
+   <div class="paper-art has-generated-art" role="img" aria-label="Conceptual illustration of diversified assets, portfolio allocation, and a risk-return frontier; not real market data.">
+    <img class="paper-art-image" src="assets/portfolio-concept.png" width="1254" height="1254" loading="lazy" decoding="async" alt="">
+    <div class="paper-art-top"><span>PORTFOLIO ALLOCATION</span><span class="paper-art-tag">03 · 2025</span></div>
+    <div class="paper-art-footer"><span data-i18n="portfolioCaption">BALANCE THE RISK.<br>SHAPE THE RETURN.</span><span class="big-symbol compact-symbol" aria-hidden="true">w → P</span></div>
+   </div>
+   <div class="paper-content">
+    <span class="work-status featured-status" data-i18n="statusPublished">Published</span>
+    <div class="paper-kicker"><span>OPEN JOURNAL OF BUSINESS AND MANAGEMENT</span><span class="dot-separator">/</span><span>2025</span><span class="dot-separator">/</span><span data-i18n="soleAuthor">SOLE AUTHOR</span></div>
+    <h3 id="title-portfolios">Portfolios, Stock Market Indices and Investment Strategies</h3>
+    <p class="authors"><strong>Yihan Wu</strong></p>
+    <p class="paper-abstract" data-i18n="portfolioAbstract">This article studies how portfolio construction, stock-market indices, and investment strategies interact, framing diversification and allocation choices through risk and return.</p>
+    <div class="tag-row"><span class="tag">Portfolio construction</span><span class="tag">Market indices</span><span class="tag">Investment strategy</span></div>
+    <div class="paper-links"><a class="text-link paper-main-link" href="https://doi.org/10.4236/ojbm.2025.133109" target="_blank" rel="noopener noreferrer"><span data-i18n="publisherLink">Publisher / DOI</span><span aria-hidden="true">↗</span></a><button class="cite-button" data-citation="portfolios" aria-haspopup="dialog" aria-label="BibTeX: Portfolios, Stock Market Indices and Investment Strategies"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
+   </div>
+  </article>
+  <div class="paper-footnote"><span>Open Journal of Business and Management · 13(3): 2099–2119 · 2025</span><span data-i18n="marketDisclaimer">The diagram is a conceptual illustration, not real market data.</span></div>
+
   <div class="publications-list">
-   <article class="publication-row reveal" id="work-sii-siri" aria-labelledby="title-sii-siri">
-    <div class="publication-index"><span class="mono">02</span><span class="publication-year">2026</span></div>
-    <div class="publication-body">
-     <div class="publication-meta"><span class="publication-venue">Frontiers in Cardiovascular Medicine</span><span class="work-status status-published" data-i18n="statusAccepted">Accepted / in press</span></div>
-     <h3 id="title-sii-siri">Baseline SII and SIRI Identify Immune-Inflammatory Susceptibility and Improve Risk Stratification of Early Subclinical Cardiac Dysfunction during Non-Steroidal Aromatase Inhibitor Therapy</h3>
-     <p class="authors">Cenyu Li, Zhengyu Tao, <strong>Yihan Wu</strong>, Chen Wu, Zi Wang, Xiaoning Wang, Huijuan Dai, Meng Jiang, Jun Pu</p>
-     <p class="publication-detail">2026</p>
-     <div class="publication-links"><a class="text-link work-doi" href="https://doi.org/10.3389/fcvm.2026.1888328" target="_blank" rel="noopener noreferrer"><span data-i18n="publisherLink">Publisher / DOI</span><span aria-hidden="true">↗</span></a><button class="cite-button" data-citation="sii-siri" aria-haspopup="dialog" aria-label="BibTeX: Baseline SII and SIRI Identify Immune-Inflammatory Susceptibility and Improve Risk Stratification of Early Subclinical Cardiac Dysfunction during Non-Steroidal Aromatase Inhibitor Therapy"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
-    </div>
-   </article>
-   <article class="publication-row reveal" id="work-portfolios" aria-labelledby="title-portfolios">
-    <div class="publication-index"><span class="mono">03</span><span class="publication-year">2025</span></div>
-    <div class="publication-body">
-     <div class="publication-meta"><span class="publication-venue">Open Journal of Business and Management</span><span class="work-status status-published" data-i18n="statusPublished">Published</span><span class="work-role" data-i18n="soleAuthor">Sole author</span></div>
-     <h3 id="title-portfolios">Portfolios, Stock Market Indices and Investment Strategies</h3>
-     <p class="authors"><strong>Yihan Wu</strong></p>
-     <p class="publication-detail">13(3): 2099–2119 · 2025</p>
-     <div class="publication-links"><a class="text-link work-doi" href="https://doi.org/10.4236/ojbm.2025.133109" target="_blank" rel="noopener noreferrer"><span data-i18n="publisherLink">Publisher / DOI</span><span aria-hidden="true">↗</span></a><button class="cite-button" data-citation="portfolios" aria-haspopup="dialog" aria-label="BibTeX: Portfolios, Stock Market Indices and Investment Strategies"><span>BibTeX</span><span aria-hidden="true">{ }</span></button></div>
-    </div>
-   </article>
    <article class="publication-row reveal" id="work-lambda" aria-labelledby="title-lambda">
     <div class="publication-index"><span class="mono">04</span><span class="publication-year">2024</span></div>
     <div class="publication-body">
@@ -349,6 +376,12 @@ html[lang=zh-CN] .hero-line{font-size:25px;line-height:1.5}html[lang=zh-CN] .sec
     treeCaption:'保留结构。<br>留住信号。',paperTrack:'研究赛道',paperAuthor:'共同第一作者',
     paperAbstract:'如何概括时间序列，同时保留连接它们的层级结构？这项工作研究结构感知的时间序列抽象，通过选择代表性子图，兼顾时间相似性与节点价值。开源代码包含 V-Greedy、P-Greedy 和 OSS 三种方法。',
     readPaper:'阅读论文',code:'代码',artifact:'归档',treeDisclaimer:'图为概念示意，并非论文实验结果。',
+    clinicalCaption:'从炎症信号，<br>到风险分层。',
+    siiAbstract:'这项已接收研究考察基线全身免疫炎症指标能否帮助识别易感性，并改进非甾体芳香化酶抑制剂治疗期间早期亚临床心功能异常的风险分层。',
+    portfolioCaption:'平衡风险，<br>塑造回报。',
+    portfolioAbstract:'本文研究投资组合构建、股票市场指数与投资策略之间的联系，从风险与回报的角度讨论多元化配置与权重选择。',
+    conceptDisclaimer:'图为概念示意，并非论文实验结果。',
+    marketDisclaimer:'图为概念示意，并非真实市场数据。',
     interestsLabel:'研究兴趣',interestsTitle1:'顺着连接，',interestsTitle2:'继续探索。',
     interest1Title:'图学习',interest1Text:'从关系结构中学习，关注图神经网络、有意义的图表示，以及如何理解模型究竟学到了什么。',
     interest2Title:'时间序列智能',interest2Text:'寻找时间数据中有用的抽象，尤其关注那些并非孤立存在、而是通过层级或图结构彼此关联的信号。',
